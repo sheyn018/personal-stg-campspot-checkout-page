@@ -3941,7 +3941,7 @@
                     
                     // Short delay before redirect for better UX
                     setTimeout(() => {
-                        let baseurl = "https://stg-campspot-checkout-page.onrender.com";
+                        let baseurl = "https://personal-stg-campspot-checkout-page.onrender.com";
                         window.location.href = `${baseurl}/booking-summary.php?invoiceUUID=${invoiceUUID}&parkId=${parkId}`;
                     }, 1500);
                 }
