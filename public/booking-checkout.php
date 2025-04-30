@@ -2397,7 +2397,7 @@
                                         <div id="guest-email" class="checkout-form-field mod-email">
                                             <label for="guest-email-input" class="checkout-form-field-label"> Email Address* <div class="checkout-form-field-label-note"> Your order confirmation will be sent here </div>
                                             </label>
-                                            <input type="email" name="guest-email" required id="guest-email-input" aria-describedby="guest-email-error" class="checkout-form-field-input ng-untouched ng-pristine ng-valid" value="<?php echo htmlspecialchars($email); ?>" disabled>
+                                            <input type="email" name="guest-email" required id="guest-email-input" aria-describedby="guest-email-error" class="checkout-form-field-input ng-untouched ng-pristine ng-valid" value="<?php echo htmlspecialchars($email); ?>">
                                         </div>
                                         <div id="guest-phone-number" class="checkout-form-field mod-phone">
                                             <label for="guest-phone-number-input" class="checkout-form-field-label"> Phone Number* <div class="checkout-form-field-label-note"> (###) ###-#### </div>
