@@ -711,6 +711,29 @@
         };
         return date.toLocaleDateString('en-US', options);
     }
+
+    // Check if this is the first time accessing this confirmation page for this invoice
+    function isFirstTimeAccessForInvoice() {
+        try {
+            // Create a unique key for this specific invoice
+            const visitKey = `booking_summary_visited_${invoiceUUID}`;
+            
+            // Check if we've already recorded a visit for this invoice
+            if (localStorage.getItem(visitKey)) {
+                console.log('This is a repeat visit for invoice:', invoiceUUID);
+                return false;
+            }
+            
+            // If we get here, this is the first visit, so record it
+            localStorage.setItem(visitKey, new Date().toISOString());
+            console.log('This is the first visit for invoice:', invoiceUUID);
+            return true;
+        } catch (e) {
+            console.error('Error checking first visit status:', e);
+            // If we can't check, default to false to prevent duplicate webhooks
+            return false;
+        }
+    }
     
     // After document is ready
     $(document).ready(function() {
@@ -933,106 +956,85 @@
 
                     // After processing all the data and updating the UI
                     try {
-                        // Get the user data we saved earlier
-                        let userData = {};
-                        try {
-                            const savedUserData = localStorage.getItem('bookingUserData');
-                            if (savedUserData) {
-                                userData = JSON.parse(savedUserData);
+                        // Only send data to Zapier if this is the first visit
+                        if (isFirstTimeAccessForInvoice()) {
+                            // Get the user data we saved earlier
+                            let userData = {};
+                            try {
+                                const savedUserData = localStorage.getItem('bookingUserData');
+                                if (savedUserData) {
+                                    userData = JSON.parse(savedUserData);
+                                }
+                            } catch (e) {
+                                console.warn('Could not retrieve stored user data:', e);
                             }
-                        } catch (e) {
-                            console.warn('Could not retrieve stored user data:', e);
-                        }
 
-                        // Prepare data for Zapier webhook
-                        const zapierData = {
-                            // User information
-                            name: userData.name || trimmedName || 'N/A',
-                            email: userData.email || 'N/A',
-                            phone: userData.phone || 'N/A',
-                            state: userData.state || 'N/A',
-                            city: userData.city || 'N/A',
-                            address: userData.address1 || 'N/A',
-                            postalCode: userData.postal || 'N/A',
-                            country: userData.country || 'N/A',
-                            sourceLink: "rigsby",
+                            // Prepare data for Zapier webhook
+                            const zapierData = {
+                                // User information
+                                name: userData.name || trimmedName || 'N/A',
+                                email: userData.email || 'N/A',
+                                phone: userData.phone || 'N/A',
+                                state: userData.state || 'N/A',
+                                city: userData.city || 'N/A',
+                                address: userData.address1 || 'N/A',
+                                postalCode: userData.postal || 'N/A',
+                                country: userData.country || 'N/A',
+                                sourceLink: "rigsby",
 
-                            // Special requests
-                            smsMessage: userData.smsMessage || false,
-                            sourceReferral: userData.sourceReferral || 'N/A',
-                            reasonStay: userData.reasonStay || 'N/A',
-                            bookingNeed: userData.bookingNeed || 'N/A',
-                            
-                            // Order information
-                            invoiceId: orderSummary.invoiceId || 'N/A',
-                            invoiceUUID: invoiceUUID || 'N/A',
-                            orderConfirmation: orderSummary.orderConfirmation || 'N/A',
-                            orderDate: orderSummary.orderDate || new Date().toISOString(),
-                            grandTotal: orderSummary.grandTotal || '0.00',
-                            remainingBalance: orderSummary.remainingBalance || '0.00',
-                            
-                            // Payment information
-                            paymentMethod: orderSummary.cardType || 'Card',
-                            lastFour: orderSummary.lastFour || 'N/A',
-                            
-                            // Park information
-                            parkId: parkId,
-                            parkName: parkMetadata.name || 'N/A',
-                            parkPhone: parkMetadata.phoneNumber || 'N/A',
-                            parkEmail: parkMetadata.email || 'N/A',
-                            
-                            // Reservation details - simplified format for first campsite
-                            firstSiteType: campsiteConfirmationSummaries[0]?.campsiteType?.name || 'N/A',
-                            firstSiteNumber: campsiteConfirmationSummaries[0]?.campsite?.name || 'N/A',
-                            firstSiteCheckin: campsiteConfirmationSummaries[0]?.checkinDateInUTC || 'N/A',
-                            firstSiteCheckout: campsiteConfirmationSummaries[0]?.checkoutDateInUTC || 'N/A',
-                            
-                            // Timestamp for the webhook call
-                            confirmationTimestamp: new Date().toISOString()
-                        };
+                                // Special requests
+                                smsMessage: userData.smsMessage || false,
+                                sourceReferral: userData.sourceReferral || 'N/A',
+                                reasonStay: userData.reasonStay || 'N/A',
+                                bookingNeed: userData.bookingNeed || 'N/A',
+                                
+                                // Order information
+                                invoiceId: orderSummary.invoiceId || 'N/A',
+                                invoiceUUID: invoiceUUID || 'N/A',
+                                orderConfirmation: orderSummary.orderConfirmation || 'N/A',
+                                orderDate: orderSummary.orderDate || new Date().toISOString(),
+                                grandTotal: orderSummary.grandTotal || '0.00',
+                                remainingBalance: orderSummary.remainingBalance || '0.00',
+                                
+                                // Payment information
+                                paymentMethod: orderSummary.cardType || 'Card',
+                                lastFour: orderSummary.lastFour || 'N/A',
+                                
+                                // Park information
+                                parkId: parkId,
+                                parkName: parkMetadata.name || 'N/A',
+                                parkPhone: parkMetadata.phoneNumber || 'N/A',
+                                parkEmail: parkMetadata.email || 'N/A',
+                                
+                                // Reservation details - simplified format for first campsite
+                                firstSiteType: campsiteConfirmationSummaries[0]?.campsiteType?.name || 'N/A',
+                                firstSiteNumber: campsiteConfirmationSummaries[0]?.campsite?.name || 'N/A',
+                                firstSiteCheckin: campsiteConfirmationSummaries[0]?.checkinDateInUTC || 'N/A',
+                                firstSiteCheckout: campsiteConfirmationSummaries[0]?.checkoutDateInUTC || 'N/A',
+                                
+                                // Timestamp for the webhook call
+                                confirmationTimestamp: new Date().toISOString()
+                            };
 
-                        // Send data to Zapier
-                        console.log('Sending data to Zapier webhook:', zapierData);
-                        
-                        // First attempt with credentials included (CORS may block this)
-                        fetch('https://hooks.zapier.com/hooks/catch/17158891/200vo7j/', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            credentials: 'include', // Include cookies if any
-                            body: JSON.stringify(zapierData)
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.text();
-                        })
-                        .then(data => {
-                            console.log('Zapier webhook success:', data);
-                        })
-                        .catch(error => {
-                            console.warn('Zapier webhook failed, trying alternative approach:', error);
-                            
-                            // Alternative approach using jQuery AJAX
+                            // Send data directly to webhook proxy (most reliable method)
                             $.ajax({
-                                url: 'https://hooks.zapier.com/hooks/catch/17158891/200vo7j/',
+                                url: 'https://insiderperks.com/wp-content/endpoints/webhook-proxy.php',
                                 type: 'POST',
-                                data: JSON.stringify(zapierData),
+                                data: JSON.stringify({
+                                    target: 'https://hooks.zapier.com/hooks/catch/17158891/200vo7j/',
+                                    payload: zapierData
+                                }),
                                 contentType: 'application/json',
-                                success: function(data) {
-                                    console.log('Zapier webhook success (jQuery):', data);
+                                success: function(response) {
+                                    console.log('Zapier webhook success:', response);
                                 },
                                 error: function(xhr, status, error) {
-                                    console.error('Zapier webhook failed (jQuery):', error);
-                                    
-                                    // If both direct methods fail, you could use a server-side proxy
-                                    // This requires a small PHP script on your server to forward the request
-                                    sendViaProxy(zapierData);
+                                    console.error('Zapier webhook failed:', error);
                                 }
                             });
-                        });
+                        } else {
+                            console.log('Skipping Zapier webhook on repeat visit');
+                        }
                     } catch (e) {
                         console.error('Error sending data to Zapier:', e);
                     }
@@ -1056,25 +1058,6 @@
             });
         }, 800); // Small delay before starting the AJAX call
     });
-
-    // Helper function to send data via server proxy if needed
-    function sendViaProxy(data) {
-        $.ajax({
-            url: 'webhook-proxy.php', // You would need to create this proxy file
-            type: 'POST',
-            data: JSON.stringify({
-                target: 'https://hooks.zapier.com/hooks/catch/17158891/200vo7j/',
-                payload: data
-            }),
-            contentType: 'application/json',
-            success: function(response) {
-                console.log('Zapier webhook success via proxy:', response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Zapier webhook failed via proxy:', error);
-            }
-        });
-    }
 
     // Adjust margin on window resize
     $(window).resize(function () {
