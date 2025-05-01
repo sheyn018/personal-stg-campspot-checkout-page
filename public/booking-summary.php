@@ -1016,14 +1016,11 @@
                                 confirmationTimestamp: new Date().toISOString()
                             };
 
-                            // Send data directly to webhook proxy (most reliable method)
+                            // Send data directly to Zapier
                             $.ajax({
-                                url: 'https://insiderperks.com/wp-content/endpoints/webhook-proxy.php',
+                                url: 'https://hooks.zapier.com/hooks/catch/17158891/200vo7j/',
                                 type: 'POST',
-                                data: JSON.stringify({
-                                    target: 'https://hooks.zapier.com/hooks/catch/17158891/200vo7j/',
-                                    payload: zapierData
-                                }),
+                                data: JSON.stringify(zapierData),
                                 contentType: 'application/json',
                                 success: function(response) {
                                     console.log('Zapier webhook success:', response);

@@ -1,13 +1,13 @@
 <?php
-// Allow from any origin
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+// Replace the existing CORS headers with these
+header("Access-Control-Allow-Origin: https://personal-stg-campspot-checkout-page.onrender.com");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-// Handle preflight OPTIONS request
+// Make sure OPTIONS requests are handled correctly
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
-    exit();
+    exit;
 }
 
 // Only allow POST requests to the proxy
