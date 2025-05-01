@@ -975,62 +975,27 @@
                                 name: userData.name || trimmedName || 'N/A',
                                 email: userData.email || 'N/A',
                                 phone: userData.phone || 'N/A',
-                                state: userData.state || 'N/A',
-                                city: userData.city || 'N/A',
-                                address: userData.address1 || 'N/A',
-                                postalCode: userData.postal || 'N/A',
-                                country: userData.country || 'N/A',
-                                sourceLink: "rigsby",
-
-                                // Special requests
-                                smsMessage: userData.smsMessage || false,
-                                sourceReferral: userData.sourceReferral || 'N/A',
-                                reasonStay: userData.reasonStay || 'N/A',
-                                bookingNeed: userData.bookingNeed || 'N/A',
-                                
-                                // Order information
-                                invoiceId: orderSummary.invoiceId || 'N/A',
-                                invoiceUUID: invoiceUUID || 'N/A',
-                                orderConfirmation: orderSummary.orderConfirmation || 'N/A',
-                                orderDate: orderSummary.orderDate || new Date().toISOString(),
-                                grandTotal: orderSummary.grandTotal || '0.00',
-                                remainingBalance: orderSummary.remainingBalance || '0.00',
-                                
-                                // Payment information
-                                paymentMethod: orderSummary.cardType || 'Card',
-                                lastFour: orderSummary.lastFour || 'N/A',
-                                
-                                // Park information
-                                parkId: parkId,
-                                parkName: parkMetadata.name || 'N/A',
-                                parkPhone: parkMetadata.phoneNumber || 'N/A',
-                                parkEmail: parkMetadata.email || 'N/A',
-                                
-                                // Reservation details - simplified format for first campsite
-                                firstSiteType: campsiteConfirmationSummaries[0]?.campsiteType?.name || 'N/A',
-                                firstSiteNumber: campsiteConfirmationSummaries[0]?.campsite?.name || 'N/A',
-                                firstSiteCheckin: campsiteConfirmationSummaries[0]?.checkinDateInUTC || 'N/A',
-                                firstSiteCheckout: campsiteConfirmationSummaries[0]?.checkoutDateInUTC || 'N/A',
-                                
-                                // Timestamp for the webhook call
+                                // ... rest of your zapier data object ...
                                 confirmationTimestamp: new Date().toISOString()
                             };
 
-                            // Send data directly to Zapier
-                            $.ajax({
-                                url: 'https://hooks.zapier.com/hooks/catch/17158891/200vo7j/',
-                                type: 'POST',
-                                data: JSON.stringify(zapierData),
-                                contentType: 'application/json',
-                                success: function(response) {
-                                    console.log('Zapier webhook success:', response);
+                            // Send data using Fetch API with no-cors mode
+                            fetch('https://hooks.zapier.com/hooks/catch/17158891/200vo7j/', {
+                                method: 'POST',
+                                mode: 'no-cors', // This prevents CORS errors but means you can't read the response
+                                headers: {
+                                    'Content-Type': 'application/json'
                                 },
-                                error: function(xhr, status, error) {
-                                    console.error('Zapier webhook failed:', error);
-                                }
+                                body: JSON.stringify(zapierData)
+                            })
+                            .then(() => {
+                                console.log('Zapier webhook request sent (no response due to no-cors)');
+                            })
+                            .catch(error => {
+                                console.error('Error sending to Zapier:', error);
                             });
                         } else {
-                            console.log('Skipping Zapier webhook on repeat visit');
+                            console.log('Skipping Zapier webhook - not first visit for this invoice');
                         }
                     } catch (e) {
                         console.error('Error sending data to Zapier:', e);
