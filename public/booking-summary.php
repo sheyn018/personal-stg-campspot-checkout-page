@@ -975,7 +975,44 @@
                                 name: userData.name || trimmedName || 'N/A',
                                 email: userData.email || 'N/A',
                                 phone: userData.phone || 'N/A',
-                                // ... rest of your zapier data object ...
+                                state: userData.state || 'N/A',
+                                city: userData.city || 'N/A',
+                                address: userData.address1 || 'N/A',
+                                postalCode: userData.postal || 'N/A',
+                                country: userData.country || 'N/A',
+                                sourceLink: "rigsby",
+
+                                // Special requests
+                                smsMessage: userData.smsMessage || false,
+                                sourceReferral: userData.sourceReferral || 'N/A',
+                                reasonStay: userData.reasonStay || 'N/A',
+                                bookingNeed: userData.bookingNeed || 'N/A',
+                                
+                                // Order information
+                                invoiceId: orderSummary.invoiceId || 'N/A',
+                                invoiceUUID: invoiceUUID || 'N/A',
+                                orderConfirmation: orderSummary.orderConfirmation || 'N/A',
+                                orderDate: orderSummary.orderDate || new Date().toISOString(),
+                                grandTotal: orderSummary.grandTotal || '0.00',
+                                remainingBalance: orderSummary.remainingBalance || '0.00',
+                                
+                                // Payment information
+                                paymentMethod: orderSummary.cardType || 'Card',
+                                lastFour: orderSummary.lastFour || 'N/A',
+                                
+                                // Park information
+                                parkId: parkId,
+                                parkName: parkMetadata.name || 'N/A',
+                                parkPhone: parkMetadata.phoneNumber || 'N/A',
+                                parkEmail: parkMetadata.email || 'N/A',
+                                
+                                // Reservation details - simplified format for first campsite
+                                firstSiteType: campsiteConfirmationSummaries[0]?.campsiteType?.name || 'N/A',
+                                firstSiteNumber: campsiteConfirmationSummaries[0]?.campsite?.name || 'N/A',
+                                firstSiteCheckin: campsiteConfirmationSummaries[0]?.checkinDateInUTC || 'N/A',
+                                firstSiteCheckout: campsiteConfirmationSummaries[0]?.checkoutDateInUTC || 'N/A',
+                                
+                                // Timestamp for the webhook call
                                 confirmationTimestamp: new Date().toISOString()
                             };
 
