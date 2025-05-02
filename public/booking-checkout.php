@@ -525,7 +525,8 @@
 
         #closeModalButton,
         #closePaymentErrorModalButton,
-        #closeTermsModalButton {
+        #closeTermsModalButton,
+        #closeCardNotReadyModalButton {
             background-color: var(--secondary) !important;
             color: white !important;
             border: none !important;
@@ -537,7 +538,8 @@
 
         #closeModalButton:hover,
         #closePaymentErrorModalButton:hover,
-        #closeTermsModalButton:hover {
+        #closeTermsModalButton:hover,
+        #closeCardNotReadyModalButton:hover {
             background-color: var(--secondary-dark) !important;
             transform: translateY(-1px) !important;
         }
@@ -2291,9 +2293,9 @@
     $email = $data['e'] ?? '';
     $phone = $data['p'] ?? '';
     $smsMessage = $data['sm'] ?? '';
-    $sourceReferral = $data['sr'] ?? 'N/A';
-    $reasonStay = $data['rs'] ?? 'N/A';
-    $bookingNeed = $data['bn'] ?? 'N/A';
+    $sourceReferral = ($data['sr'] ?? '') === '0' ? 'N/A' : ($data['sr'] ?? 'N/A');
+    $reasonStay = ($data['rs'] ?? '') === '0' ? 'N/A' : ($data['rs'] ?? 'N/A');
+    $bookingNeed = ($data['bn'] ?? '') === '0' ? 'N/A' : ($data['bn'] ?? 'N/A');
     
     $fullAddress = "$address1, $city, $state $postal, $country";
 
@@ -2553,6 +2555,15 @@
                                 <button id="closePaymentErrorModalButton">OK</button> 
                             </div>
                         </div>
+
+                        <div id="cardNotReadyModal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <p>We're still processing your card. Please wait a moment and try again.</p>
+                                <button id="closeCardNotReadyModalButton">OK</button>
+                            </div>
+                        </div>
+
                         <div class="checkout-form-submit">
                             <button type="button" onclick="submitPaymentForm(cartId, parkId)" class="checkout-form-submit-button mod-place-order app-checkout-submit"> Place Order </button>
                         </div>
@@ -2584,6 +2595,13 @@
         $('#closePaymentErrorModalButton').click(function (event) {
             event.preventDefault(); // Prevent any form submission or page refresh
             closeModal('paymentErrorModal');
+        });
+
+        $('#closeCardNotReadyModalButton').click(function(event) {
+            event.preventDefault();
+            closeModal('cardNotReadyModal');
+            // Focus on the card iframe to draw user attention
+            document.getElementById('tokenFrame').focus();
         });
 
         // Also allow clicking the 'X' (close) button
@@ -3763,12 +3781,9 @@
             var token = document.getElementById('mytoken').value;
             
             // Check card number token first, before creating the overlay
-            if (!token) {
-                // Display error message for missing card number
-                alert("Please enter a valid card number");
-                
-                // Focus on the card iframe to draw user attention
-                document.getElementById('tokenFrame').focus();
+            if (!token || token.trim() === '') {
+                // Display modal for missing card number instead of alert
+                document.getElementById('cardNotReadyModal').style.display = 'block';
                 return;
             }
             
