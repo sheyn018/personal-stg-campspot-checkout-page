@@ -1,0 +1,736 @@
+{
+    "cart": {
+        "uuid": "8dd7f77d-f26f-4863-bd20-bdddd80d16f5",
+        "parkShoppingCarts": {
+            "92": {
+                "shoppingCartItems": [
+                    {
+                        "campsiteType": {
+                            "id": 1101,
+                            "name": "Deluxe Cabin",
+                            "campsiteCategoryCode": "lodging",
+                            "images": {
+                                "mainImage": {
+                                    "small": {
+                                        "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                        "height": 240,
+                                        "width": 240
+                                    },
+                                    "medium": {
+                                        "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                        "height": 600,
+                                        "width": 600
+                                    },
+                                    "large": {
+                                        "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                        "height": 1000,
+                                        "width": 1000
+                                    },
+                                    "extraLarge": {
+                                        "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                        "height": 1540,
+                                        "width": 1540
+                                    },
+                                    "originalImageUrl": "https://campspot-production.s3.amazonaws.com/6e1ae590-475a-418d-bf80-191076e1e643_thumbnail (10).jpg"
+                                },
+                                "slideshowImages": [
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNmUxYWU1OTAtNDc1YS00MThkLWJmODAtMTkxMDc2ZTFlNjQzX3RodW1ibmFpbCAoMTApLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/6e1ae590-475a-418d-bf80-191076e1e643_thumbnail (10).jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMTA0NzA1YzYtY2YxNC00ZTU1LWE1YjgtNGRkZmZmMjNmNWE4XzEwNiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMTA0NzA1YzYtY2YxNC00ZTU1LWE1YjgtNGRkZmZmMjNmNWE4XzEwNiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMTA0NzA1YzYtY2YxNC00ZTU1LWE1YjgtNGRkZmZmMjNmNWE4XzEwNiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMTA0NzA1YzYtY2YxNC00ZTU1LWE1YjgtNGRkZmZmMjNmNWE4XzEwNiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/104705c6-cf14-4e55-a5b8-4ddfff23f5a8_106 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODVkMjc4MjYtYTdlMC00NGYwLWI4YmItNzE1NmY4ODk1YTgwXzIwNiBXZWxjb21lIEdhcmRlbi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjI0MCwiaGVpZ2h0IjoyNDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjkwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODVkMjc4MjYtYTdlMC00NGYwLWI4YmItNzE1NmY4ODk1YTgwXzIwNiBXZWxjb21lIEdhcmRlbi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjYwMCwiaGVpZ2h0Ijo2MDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODVkMjc4MjYtYTdlMC00NGYwLWI4YmItNzE1NmY4ODk1YTgwXzIwNiBXZWxjb21lIEdhcmRlbi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODVkMjc4MjYtYTdlMC00NGYwLWI4YmItNzE1NmY4ODk1YTgwXzIwNiBXZWxjb21lIEdhcmRlbi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE1NDAsImhlaWdodCI6MTU0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/85d27826-a7e0-44f0-b8bb-7156f8895a80_206 Welcome Garden.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiM2E0YTM3ZTItNzEwMC00MTMwLWI1MjktMWNiZmRlYzU1MGM4XzAwMCAwIENsdWJob3VzZS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjI0MCwiaGVpZ2h0IjoyNDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjkwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiM2E0YTM3ZTItNzEwMC00MTMwLWI1MjktMWNiZmRlYzU1MGM4XzAwMCAwIENsdWJob3VzZS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjYwMCwiaGVpZ2h0Ijo2MDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiM2E0YTM3ZTItNzEwMC00MTMwLWI1MjktMWNiZmRlYzU1MGM4XzAwMCAwIENsdWJob3VzZS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiM2E0YTM3ZTItNzEwMC00MTMwLWI1MjktMWNiZmRlYzU1MGM4XzAwMCAwIENsdWJob3VzZS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE1NDAsImhlaWdodCI6MTU0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/3a4a37e2-7100-4130-b529-1cbfdec550c8_000 0 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGM0ZWMzYjctNDFlZi00MTQ0LWFiNWMtYjU0ZDliOWU0YjRlXzIwMiBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGM0ZWMzYjctNDFlZi00MTQ0LWFiNWMtYjU0ZDliOWU0YjRlXzIwMiBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGM0ZWMzYjctNDFlZi00MTQ0LWFiNWMtYjU0ZDliOWU0YjRlXzIwMiBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGM0ZWMzYjctNDFlZi00MTQ0LWFiNWMtYjU0ZDliOWU0YjRlXzIwMiBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/4c4ec3b7-41ef-4144-ab5c-b54d9b9e4b4e_202 Laundry.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOTc5YTViMzctOTg0Zi00ODEwLTlhZDAtNThhY2U4NzQzODYxXzEwMiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOTc5YTViMzctOTg0Zi00ODEwLTlhZDAtNThhY2U4NzQzODYxXzEwMiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOTc5YTViMzctOTg0Zi00ODEwLTlhZDAtNThhY2U4NzQzODYxXzEwMiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOTc5YTViMzctOTg0Zi00ODEwLTlhZDAtNThhY2U4NzQzODYxXzEwMiBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/979a5b37-984f-4810-9ad0-58ace8743861_102 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDNkNzQwYzItYzcxMC00NGNlLTkzMjUtNjczMjgxNjE5ZjkzXzEwNSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDNkNzQwYzItYzcxMC00NGNlLTkzMjUtNjczMjgxNjE5ZjkzXzEwNSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDNkNzQwYzItYzcxMC00NGNlLTkzMjUtNjczMjgxNjE5ZjkzXzEwNSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDNkNzQwYzItYzcxMC00NGNlLTkzMjUtNjczMjgxNjE5ZjkzXzEwNSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/d3d740c2-c710-44ce-9325-673281619f93_105 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDk2OWFjOWUtM2I3NC00ZTJhLTk4M2MtZjU2NzY3ZTI4MTJkXzEwMSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDk2OWFjOWUtM2I3NC00ZTJhLTk4M2MtZjU2NzY3ZTI4MTJkXzEwMSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDk2OWFjOWUtM2I3NC00ZTJhLTk4M2MtZjU2NzY3ZTI4MTJkXzEwMSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZDk2OWFjOWUtM2I3NC00ZTJhLTk4M2MtZjU2NzY3ZTI4MTJkXzEwMSBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/d969ac9e-3b74-4e2a-983c-f56767e2812d_101 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMGNlMDZlMzgtYTM5NC00ODhiLWIwYTUtZDJlOThiZDlhNGE4XzAwMSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMGNlMDZlMzgtYTM5NC00ODhiLWIwYTUtZDJlOThiZDlhNGE4XzAwMSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMGNlMDZlMzgtYTM5NC00ODhiLWIwYTUtZDJlOThiZDlhNGE4XzAwMSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMGNlMDZlMzgtYTM5NC00ODhiLWIwYTUtZDJlOThiZDlhNGE4XzAwMSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/0ce06e38-a394-488b-b0a5-d2e98bd9a4a8_001 1 bedroom.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzNjNWQ2YWUtNTNhNi00YmY0LTkzZTAtMzNhNTM1ZmQ2OTIxXzAwNCAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzNjNWQ2YWUtNTNhNi00YmY0LTkzZTAtMzNhNTM1ZmQ2OTIxXzAwNCAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzNjNWQ2YWUtNTNhNi00YmY0LTkzZTAtMzNhNTM1ZmQ2OTIxXzAwNCAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzNjNWQ2YWUtNTNhNi00YmY0LTkzZTAtMzNhNTM1ZmQ2OTIxXzAwNCAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/33c5d6ae-53a6-4bf4-93e0-33a535fd6921_004 1 bedroom.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWYyNzk4MjUtODFkYy00ZTM5LTg3MTMtYjkyZGJhYTMxZGQ2XzIwMyBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWYyNzk4MjUtODFkYy00ZTM5LTg3MTMtYjkyZGJhYTMxZGQ2XzIwMyBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWYyNzk4MjUtODFkYy00ZTM5LTg3MTMtYjkyZGJhYTMxZGQ2XzIwMyBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWYyNzk4MjUtODFkYy00ZTM5LTg3MTMtYjkyZGJhYTMxZGQ2XzIwMyBMYXVuZHJ5LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/1f279825-81dc-4e39-8713-b92dbaa31dd6_203 Laundry.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODE4NDBiZmUtYWEyNS00NGVlLWJiYTYtMDczNDI3MjJlNTM4XzIwNSBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODE4NDBiZmUtYWEyNS00NGVlLWJiYTYtMDczNDI3MjJlNTM4XzIwNSBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODE4NDBiZmUtYWEyNS00NGVlLWJiYTYtMDczNDI3MjJlNTM4XzIwNSBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiODE4NDBiZmUtYWEyNS00NGVlLWJiYTYtMDczNDI3MjJlNTM4XzIwNSBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/81840bfe-aa25-44ee-bba6-07342722e538_205 Resort Store.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOGRmMTlkMTgtODc1YS00MjdlLTg5YzEtNTFlZTY4MzI1OWU5XzIwMSBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOGRmMTlkMTgtODc1YS00MjdlLTg5YzEtNTFlZTY4MzI1OWU5XzIwMSBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOGRmMTlkMTgtODc1YS00MjdlLTg5YzEtNTFlZTY4MzI1OWU5XzIwMSBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiOGRmMTlkMTgtODc1YS00MjdlLTg5YzEtNTFlZTY4MzI1OWU5XzIwMSBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/8df19d18-875a-427e-89c1-51ee683259e9_201 Grounds.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiN2ZjMDAxOTQtNDUzYS00ZGI2LTg0MjctYjA2MzQ5Yzg1OWIxXzIwMCBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiN2ZjMDAxOTQtNDUzYS00ZGI2LTg0MjctYjA2MzQ5Yzg1OWIxXzIwMCBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiN2ZjMDAxOTQtNDUzYS00ZGI2LTg0MjctYjA2MzQ5Yzg1OWIxXzIwMCBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiN2ZjMDAxOTQtNDUzYS00ZGI2LTg0MjctYjA2MzQ5Yzg1OWIxXzIwMCBHcm91bmRzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/7fc00194-453a-4db6-8427-b06349c859b1_200 Grounds.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYWZjMjQyNmMtYTMyYS00M2I3LTg0MzMtZWE4M2JhZjZhNGJhXzEwMCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYWZjMjQyNmMtYTMyYS00M2I3LTg0MzMtZWE4M2JhZjZhNGJhXzEwMCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYWZjMjQyNmMtYTMyYS00M2I3LTg0MzMtZWE4M2JhZjZhNGJhXzEwMCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYWZjMjQyNmMtYTMyYS00M2I3LTg0MzMtZWE4M2JhZjZhNGJhXzEwMCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/afc2426c-a32a-43b7-8433-ea83baf6a4ba_100 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYjA0YzI0NWYtOWExNC00YWZmLTk4ZDctMmU4YjU3OTZkNzgyXzIwNCBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYjA0YzI0NWYtOWExNC00YWZmLTk4ZDctMmU4YjU3OTZkNzgyXzIwNCBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYjA0YzI0NWYtOWExNC00YWZmLTk4ZDctMmU4YjU3OTZkNzgyXzIwNCBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYjA0YzI0NWYtOWExNC00YWZmLTk4ZDctMmU4YjU3OTZkNzgyXzIwNCBSZXNvcnQgU3RvcmUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/b04c245f-9a14-4aff-98d7-2e8b5796d782_204 Resort Store.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGE2MjVmZDQtMWJiYy00NWY3LWFlY2MtMWMxYmYyMGI0ZDlkXzAwNSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGE2MjVmZDQtMWJiYy00NWY3LWFlY2MtMWMxYmYyMGI0ZDlkXzAwNSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGE2MjVmZDQtMWJiYy00NWY3LWFlY2MtMWMxYmYyMGI0ZDlkXzAwNSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiNGE2MjVmZDQtMWJiYy00NWY3LWFlY2MtMWMxYmYyMGI0ZDlkXzAwNSAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/4a625fd4-1bbc-45f7-aecc-1c1bf20b4d9d_005 1 bedroom.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzY1NGMzMzUtZjE1OC00OGYwLTgzMWQtYjYyZmIwMjNlN2ExXzAwMyAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzY1NGMzMzUtZjE1OC00OGYwLTgzMWQtYjYyZmIwMjNlN2ExXzAwMyAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzY1NGMzMzUtZjE1OC00OGYwLTgzMWQtYjYyZmIwMjNlN2ExXzAwMyAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMzY1NGMzMzUtZjE1OC00OGYwLTgzMWQtYjYyZmIwMjNlN2ExXzAwMyAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/3654c335-f158-48f0-831d-b62fb023e7a1_003 1 bedroom.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWY2ZGMzYTQtOWEwNC00OWUzLWJiMTctMmU3Yzg0MzdkNjVmXzIwNyBXYWxraW5nIFRyYWlsLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWY2ZGMzYTQtOWEwNC00OWUzLWJiMTctMmU3Yzg0MzdkNjVmXzIwNyBXYWxraW5nIFRyYWlsLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWY2ZGMzYTQtOWEwNC00OWUzLWJiMTctMmU3Yzg0MzdkNjVmXzIwNyBXYWxraW5nIFRyYWlsLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWY2ZGMzYTQtOWEwNC00OWUzLWJiMTctMmU3Yzg0MzdkNjVmXzIwNyBXYWxraW5nIFRyYWlsLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/1f6dc3a4-9a04-49e3-bb17-2e7c8437d65f_207 Walking Trail.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZTYzOGUzYWMtZTcxYy00M2E0LThkZGEtMGRmYWU1MjBiODllXzAwMiAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZTYzOGUzYWMtZTcxYy00M2E0LThkZGEtMGRmYWU1MjBiODllXzAwMiAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZTYzOGUzYWMtZTcxYy00M2E0LThkZGEtMGRmYWU1MjBiODllXzAwMiAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiZTYzOGUzYWMtZTcxYy00M2E0LThkZGEtMGRmYWU1MjBiODllXzAwMiAxIGJlZHJvb20uanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/e638e3ac-e71c-43a4-8dda-0dfae520b89e_002 1 bedroom.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiY2FhYTdhOWEtZjlmYS00NmRiLTk0MjItNmFmOGI5ZWYwNGYxXzEwMyBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiY2FhYTdhOWEtZjlmYS00NmRiLTk0MjItNmFmOGI5ZWYwNGYxXzEwMyBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiY2FhYTdhOWEtZjlmYS00NmRiLTk0MjItNmFmOGI5ZWYwNGYxXzEwMyBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiY2FhYTdhOWEtZjlmYS00NmRiLTk0MjItNmFmOGI5ZWYwNGYxXzEwMyBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/caaa7a9a-f9fa-46db-9422-6af8b9ef04f1_103 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYTU4NmU4MzAtYTk3OC00NzZiLThmNGMtOTU1ZDEwMTJhYTNhXzEwNCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyNDAsImhlaWdodCI6MjQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo5MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYTU4NmU4MzAtYTk3OC00NzZiLThmNGMtOTU1ZDEwMTJhYTNhXzEwNCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDAsImhlaWdodCI6NjAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYTU4NmU4MzAtYTk3OC00NzZiLThmNGMtOTU1ZDEwMTJhYTNhXzEwNCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiYTU4NmU4MzAtYTk3OC00NzZiLThmNGMtOTU1ZDEwMTJhYTNhXzEwNCBDbHViaG91c2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNTQwLCJoZWlnaHQiOjE1NDAsImZpdCI6Imluc2lkZSJ9LCJqcGVnIjp7InF1YWxpdHkiOjUwfSwidG9Gb3JtYXQiOiJqcGVnIn19",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/a586e830-a978-476b-8f4c-955d1012aa3a_104 Clubhouse.jpg"
+                                    },
+                                    {
+                                        "small": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWMwZDMwNmMtODhmYS00MjYzLWFmZjktMjA3YWU0M2I4NjhhXzAxIDEgQkQgRmxvb3JwbGFuLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 240,
+                                            "width": 240
+                                        },
+                                        "medium": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWMwZDMwNmMtODhmYS00MjYzLWFmZjktMjA3YWU0M2I4NjhhXzAxIDEgQkQgRmxvb3JwbGFuLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjAwLCJoZWlnaHQiOjYwMCwiZml0IjoiaW5zaWRlIn0sImpwZWciOnsicXVhbGl0eSI6NTB9LCJ0b0Zvcm1hdCI6ImpwZWcifX0=",
+                                            "height": 600,
+                                            "width": 600
+                                        },
+                                        "large": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWMwZDMwNmMtODhmYS00MjYzLWFmZjktMjA3YWU0M2I4NjhhXzAxIDEgQkQgRmxvb3JwbGFuLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1000,
+                                            "width": 1000
+                                        },
+                                        "extraLarge": {
+                                            "url": "https://images.campspot.com/eyJidWNrZXQiOiJjYW1wc3BvdC1wcm9kdWN0aW9uIiwia2V5IjoiMWMwZDMwNmMtODhmYS00MjYzLWFmZjktMjA3YWU0M2I4NjhhXzAxIDEgQkQgRmxvb3JwbGFuLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTU0MCwiaGVpZ2h0IjoxNTQwLCJmaXQiOiJpbnNpZGUifSwianBlZyI6eyJxdWFsaXR5Ijo1MH0sInRvRm9ybWF0IjoianBlZyJ9fQ==",
+                                            "height": 1540,
+                                            "width": 1540
+                                        },
+                                        "originalImageUrl": "https://campspot-production.s3.amazonaws.com/1c0d306c-88fa-4263-aff9-207ae43b868a_01 1 BD Floorplan.jpg"
+                                    }
+                                ]
+                            },
+                            "isPetFriendly": true,
+                            "isAccessible": false,
+                            "lockingFee": 40,
+                            "lockingEnabled": true
+                        },
+                        "campsite": {
+                            "id": 33199,
+                            "name": "311",
+                            "mapId": "campsiteID_x5F__402_",
+                            "amenities": [
+                                "Air Conditioning",
+                                "Picnic Table",
+                                "Cable",
+                                "Private Shower",
+                                "Coffee Maker",
+                                "Patio",
+                                "Pet-Friendly",
+                                "Wi-Fi",
+                                "Private Bathroom",
+                                "Refrigerator",
+                                "Gas Grill",
+                                "Kitchenette",
+                                "Heat",
+                                "Microwave"
+                            ]
+                        },
+                        "checkinDateInParkTimeZone": "2025-06-01",
+                        "checkoutDateInParkTimeZone": "2025-06-05",
+                        "checkinDateInUTC": "2025-06-01T00:00:00Z",
+                        "checkoutDateInUTC": "2025-06-05T00:00:00Z",
+                        "guestCategories": {
+                            "ageCategories": [
+                                {
+                                    "name": "Children",
+                                    "count": 0,
+                                    "parkAgeCategoryIndex": 1,
+                                    "isUnmapped": false
+                                },
+                                {
+                                    "name": "Adults",
+                                    "count": 2,
+                                    "parkAgeCategoryIndex": 2,
+                                    "isUnmapped": false
+                                }
+                            ],
+                            "pets": 1
+                        },
+                        "petCount": 1,
+                        "pricing": {
+                            "tripTotal": 677.68,
+                            "tripTotalBeforeTaxesFeesAndDiscounts": 516,
+                            "tripTotalWithLockSiteFee": 722.87,
+                            "totalTaxes": 76.68,
+                            "averagePricePerNight": 160.25,
+                            "averagePricePerNightBeforeDiscounts": 180.72,
+                            "averagePricePerNightBeforeTaxesFeesAndDiscounts": 129,
+                            "averagePricePerNightBeforeTaxesAndFees": 147.75,
+                            "feeSummary": {
+                                "totalCampgroundFees": 125,
+                                "totalCampgroundFeesWithoutLockFee": 85,
+                                "totalCampgroundFeesWithLockFee": 125,
+                                "itemizedCampgroundFees": [
+                                    {
+                                        "name": "Pet Fees",
+                                        "feeType": "PET_FEES",
+                                        "price": 75
+                                    },
+                                    {
+                                        "name": "Site Lock Fee",
+                                        "feeType": "SITE_LOCK_FEE",
+                                        "price": 40
+                                    },
+                                    {
+                                        "name": "Booking Fee",
+                                        "feeType": "SURCHARGES",
+                                        "price": 10
+                                    }
+                                ],
+                                "itemizedCampgroundFeesWithoutLockFee": [
+                                    {
+                                        "name": "Pet Fees",
+                                        "feeType": "PET_FEES",
+                                        "price": 75
+                                    },
+                                    {
+                                        "name": "Booking Fee",
+                                        "feeType": "SURCHARGES",
+                                        "price": 10
+                                    }
+                                ],
+                                "itemizedCampgroundFeesWithLockFee": [
+                                    {
+                                        "name": "Pet Fees",
+                                        "feeType": "PET_FEES",
+                                        "price": 75
+                                    },
+                                    {
+                                        "name": "Site Lock Fee",
+                                        "feeType": "SITE_LOCK_FEE",
+                                        "price": 40
+                                    },
+                                    {
+                                        "name": "Booking Fee",
+                                        "feeType": "SURCHARGES",
+                                        "price": 10
+                                    }
+                                ],
+                                "lockFee": 40,
+                                "lockFeeTaxes": 5.19
+                            },
+                            "packageDiscounts": [],
+                            "serviceFee": 0,
+                            "externalFees": []
+                        },
+                        "smartPricing": {
+                            "tripTotal": 722.87,
+                            "tripTotalBeforeTaxesFeesAndDiscounts": 516,
+                            "totalTaxes": 81.87,
+                            "averagePricePerNight": 160.25,
+                            "averagePricePerNightBeforeDiscounts": 180.72,
+                            "averagePricePerNightBeforeTaxesFeesAndDiscounts": 129,
+                            "feeSummary": {
+                                "totalCampgroundFees": 125,
+                                "itemizedCampgroundFees": [
+                                    {
+                                        "name": "Pet Fees",
+                                        "feeType": "PET_FEES",
+                                        "price": 75
+                                    },
+                                    {
+                                        "name": "Site Lock Fee",
+                                        "feeType": "SITE_LOCK_FEE",
+                                        "price": 40
+                                    },
+                                    {
+                                        "name": "Booking Fee",
+                                        "feeType": "SURCHARGES",
+                                        "price": 10
+                                    }
+                                ],
+                                "lockFee": 40
+                            },
+                            "packageDiscounts": [],
+                            "externalFees": []
+                        },
+                        "siteLocationLocked": true,
+                        "dailyRateAddons": [],
+                        "onlineStoreAddons": [],
+                        "reservationDetailId": 43611812,
+                        "subtotal": 722.87,
+                        "acceptedWeatherGuaranteeQuote": false
+                    }
+                ],
+                "parkId": 92,
+                "parkSlug": "verderanchrvresort",
+                "parkName": "Verde Ranch RV Resort, Camp Verde, Arizona",
+                "parkCity": "Camp Verde",
+                "parkStateOrProvince": "AZ",
+                "subtotal": 722.87,
+                "externalCharges": [],
+                "grandTotal": 722.87
+            }
+        }
+    },
+    "minimumPayment": {
+        "minimumPayment": 361.44,
+        "reservationId": 37341793
+    }
+}

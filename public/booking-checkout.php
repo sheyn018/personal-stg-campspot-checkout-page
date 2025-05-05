@@ -3016,21 +3016,30 @@
             const campId = campsite.campsite.id;
             const amenities = campsite.campsite.amenities;
             const petFriendly = campsite.campsiteType.isPetFriendly;
-            const siteLock = String(campsite.siteLocationLocked);
-            const lockFee = campsite.campsiteType.lockingFee;
+            const siteLock = String(campsite?.siteLocationLocked ?? false);
             const checkin = new Date(campsite.checkinDateInParkTimeZone);
             const checkout = new Date(campsite.checkoutDateInParkTimeZone);
             const children = campsite.guestCategories.ageCategories.find(category => category.name === 'Children')?.count || 0;
             const adults = campsite.guestCategories.ageCategories.find(category => category.name === 'Adults')?.count || 0;
             const pets = campsite.guestCategories.pets || 0;
+            const totalBaseRate = campsite.pricing.tripTotalBeforeTaxesFeesAndDiscounts;
             const pricePerNight = campsite.pricing.averagePricePerNightBeforeTaxesAndFees;
             const taxes = campsite.pricing.totalTaxes;
-            let campFees, totalPrice;
+
+            let lockFee, lockFeeTaxes, petFee, bookingFee, campFees, totalPrice;
 
             if (siteLock === 'true') {
+                lockFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithLockFee.find(fee => fee.feeType === "SITE_LOCK_FEE")?.price || 0;
+                lockFeeTaxes = campsite.pricing.feeSummary.lockFeeTaxes || 0;
+                petFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithLockFee.find(fee => fee.feeType === "PET_FEES")?.price || 0;
+                bookingFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithLockFee.find(fee => fee.feeType === "SURCHARGES")?.price || 0;
                 campFees = campsite.pricing.feeSummary.totalCampgroundFeesWithLockFee + campsite.pricing.feeSummary.lockFeeTaxes;
                 totalPrice = campsite.pricing.tripTotalWithLockSiteFee;
             } else {
+                lockFee = 0;
+                lockFeeTaxes = 0;
+                petFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithoutLockFee.find(fee => fee.feeType === "PET_FEES")?.price || 0;
+                bookingFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithoutLockFee.find(fee => fee.feeType === "SURCHARGES")?.price || 0;
                 campFees = campsite.pricing.feeSummary.totalCampgroundFeesWithoutLockFee;
                 totalPrice = campsite.pricing.tripTotal;
             }
@@ -3097,14 +3106,18 @@
                 amenities,
                 petFriendly,
                 siteLock,
-                lockFee,
                 checkin,
                 checkout,
                 children,
                 adults,
                 pets,
+                totalBaseRate,
                 pricePerNight,
                 taxes,
+                lockFee,
+                lockFeeTaxes,
+                petFee,
+                bookingFee,
                 campFees,
                 discounts,
                 totalDiscountAmount,
@@ -3210,45 +3223,95 @@
         }
 
         function displayAvailableCampsite(campsites, subTotal) {
-                console.log('displayAvailableCampsite called with', campsites.length, 'campsites');
-                const tbody = $('#order-summary-table-body');
-                tbody.empty();
+            console.log('displayAvailableCampsite called with', campsites.length, 'campsites');
+            const tbody = $('#order-summary-table-body');
+            tbody.empty();
 
-                campsites.forEach((campsite, index) => {
-                    console.log(`Processing campsite ${index}:`, campsite.campsiteName);
-                    console.log('Discounts for this campsite:', campsite.discounts);
-                    
-                    const numberOfNights = Math.ceil((new Date(campsite.checkout) - new Date(campsite.checkin)) / (1000 * 60 * 60 * 24));
-                    const discountsHtml = displayDiscounts(campsite.discounts);
-                    console.log('Generated discounts HTML:', discountsHtml);
-                    
-                    const row = $(`
-                        <table class="checkout-summary-item">
-                            <tbody>
-                                <tr>
-                                    <td class="checkout-summary-item-title app-checkout-summary-site-title">
-                                        ${campsite.campsiteName} <span>- ${campsite.campName}</span>
-                                        <campsite-name-icons>
-                                            <!-- Icons can be added here if needed -->
-                                        </campsite-name-icons>
-                                    </td>
-                                    <td class="checkout-summary-item-price">
-                                        <span>$${campsite.totalPrice.toFixed(2)}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="checkout-summary-item-details">
-                                        <div>
-                                            <span class="app-checkout-summary-site-dates">${formatDateRange(new Date(campsite.checkin), new Date(campsite.checkout))}</span> (${numberOfNights} Nights)
+            campsites.forEach((campsite, index) => {
+                console.log(`Processing campsite ${index}:`, campsite.campsiteName);
+                
+                const numberOfNights = Math.ceil((new Date(campsite.checkout) - new Date(campsite.checkin)) / (1000 * 60 * 60 * 24));
+                const discountsHtml = displayDiscounts(campsite.discounts);
+                
+                // Calculate subtotal before taxes and fees
+                const baseRate = campsite.pricePerNight * numberOfNights;
+                
+                // Build the row with expanded pricing details
+                const row = $(`
+                    <table class="checkout-summary-item">
+                        <tbody>
+                            <tr>
+                                <td class="checkout-summary-item-title app-checkout-summary-site-title">
+                                    ${campsite.campsiteName} <span>- ${campsite.campName}</span>
+                                    <campsite-name-icons>
+                                        <!-- Icons can be added here if needed -->
+                                    </campsite-name-icons>
+                                </td>
+                                <td class="checkout-summary-item-price">
+                                    <span>$${campsite.totalPrice.toFixed(2)}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="checkout-summary-item-details">
+                                    <div>
+                                        <span class="app-checkout-summary-site-dates">${formatDateRange(new Date(campsite.checkin), new Date(campsite.checkout))}</span> (${numberOfNights} Nights)
+                                    </div>
+                                    <div class="app-checkout-summary-site-guests">${formatGuests(campsite.adults, campsite.children, campsite.pets)}</div>
+                                    
+                                    <!-- Detailed Cost Breakdown -->
+                                    <div class="cost-breakdown" style="margin-top: 15px; border-top: 1px dotted #ddd; padding-top: 10px;">
+                                        <div style="font-weight: 600; color: var(--primary); margin-bottom: 5px;">Cost Details:</div>
+                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                                            <span>Base Rate (${numberOfNights} nights):</span>
+                                            <span>$${(campsite.totalBaseRate).toFixed(2)}</span>
                                         </div>
-                                        <div class="app-checkout-summary-site-guests">${formatGuests(campsite.adults, campsite.children, campsite.pets)}</div>
+                                        
+                                        <!-- Pet Fees -->
+                                        ${campsite.pets > 0 ? 
+                                        `<div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                                            <span>Pet Fees:</span>
+                                            <span>$${campsite.petFee.toFixed(2)}</span>
+                                        </div>` : ''}
+                                        
+                                        <!-- Booking Fee -->
+                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                                            <span>Booking Fee:</span>
+                                            <span>$${campsite.bookingFee}</span>
+                                        </div>
+                                        
+                                        <!-- Taxes -->
+                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                                            <span>Taxes:</span>
+                                            <span>$${campsite.taxes.toFixed(2)}</span>
+                                        </div>
+                                        
+                                        <!-- Site Lock Fee if applicable -->
+                                        ${campsite.siteLock === 'true' ? 
+                                        `<div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                                            <span>Site Lock Fee:</span>
+                                            <span>$${campsite.lockFee.toFixed(2)}</span>
+                                        </div>` : ''}
+
+                                        <!-- Show lock fee taxes if applicable -->
+                                        ${campsite.siteLock === 'true' ? 
+                                        `<div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                                            <span>Lock Fee Taxes:</span>
+                                            <span>$${campsite.lockFeeTaxes}</span>
+                                        </div>` : ''}
+                                        
                                         ${discountsHtml}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    `);
-                    tbody.append(row);
+                                        
+                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-top: 8px; border-top: 1px solid #ddd; padding-top: 8px; font-weight: 700; color: var(--primary);">
+                                            <span>Total:</span>
+                                            <span>$${campsite.totalPrice.toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `);
+                tbody.append(row);
 
                     // Display daily rate add-ons
                     campsite.dailyRateAddons.forEach(addOn => {
@@ -3288,17 +3351,16 @@
                     });
                 });
 
-                // Update this line to include the $ symbol consistently
+                // Update total display
                 $('#order-total').text(`$${subTotal.toFixed(2)}`);
                 
-                $(document).ready(function () {
-                // Update total balance display
-                $('.checkout-form-payment-amount-selectable label.is-selected .checkout-form-payment-amount-selectable-value')
-                    .text(`$${parseFloat($('#order-total').text()).toFixed(2)}`);
+                // Update payment amount displays
+                $(document).ready(function() {
+                    $('.checkout-form-payment-amount-selectable label.is-selected .checkout-form-payment-amount-selectable-value')
+                        .text(`$${parseFloat($('#order-total').text().replace('$','')).toFixed(2)}`);
 
-                // Ensure partial payment value is preserved
-                $('#payment-amount-partial-value').text(`$${$('#payment-amount-partial').data('partial-value')}`);
-            });
+                    $('#payment-amount-partial-value').text(`$${$('#payment-amount-partial').data('partial-value')}`);
+                });
             }
 
             function formatDateRange(startDate, endDate) {
