@@ -2264,6 +2264,53 @@
             background-color: var(--primary) !important;
             border-color: var(--primary) !important;
         }
+
+        /* Add this to your existing CSS */
+        .invalid-input {
+            border-color: #e74c3c !important;
+            background-color: #fff8f8 !important;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+        }
+        
+        .valid-input {
+            border-color: #2ecc71 !important;
+            background-color: #f8fff8 !important;
+            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2) !important;
+        }
+
+        /* Improve the focus state for the email field */
+        #guest-email-input:focus {
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 3px rgba(15, 109, 152, 0.2) !important;
+            outline: none !important;
+        }
+
+        /* Prevent text selection and cursor changes on order summary */
+        .checkout-summary-content,
+        .checkout-summary-item,
+        .checkout-summary-item *,
+        .checkout-summary-totals,
+        .checkout-summary-totals * {
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            cursor: default !important;
+        }
+
+        /* Make sure table cells can't be focused */
+        .checkout-summary-item td,
+        .checkout-summary-totals td,
+        .checkout-summary-item th,
+        .checkout-summary-totals th {
+            outline: none !important;
+            pointer-events: none !important;
+        }
+
+        /* Fix for Firefox which sometimes treats tables differently */
+        table {
+            -moz-user-select: none !important;
+        }
     </style>
 </head>
 <body>
@@ -2564,6 +2611,14 @@
                             </div>
                         </div>
 
+                        <div id="emailErrorModal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <p>Please enter a valid email address to continue with your order.</p>
+                                <button id="closeEmailModalButton">OK</button>
+                            </div>
+                        </div>
+
                         <div class="checkout-form-submit">
                             <button type="button" onclick="submitPaymentForm(cartId, parkId)" class="checkout-form-submit-button mod-place-order app-checkout-submit"> Place Order </button>
                         </div>
@@ -2602,6 +2657,13 @@
             closeModal('cardNotReadyModal');
             // Focus on the card iframe to draw user attention
             document.getElementById('tokenFrame').focus();
+        });
+
+        $('#closeEmailModalButton').click(function(event) {
+            event.preventDefault();
+            closeModal('emailErrorModal');
+            // Focus on the email field
+            document.getElementById('guest-email-input').focus();
         });
 
         // Also allow clicking the 'X' (close) button
@@ -3837,9 +3899,51 @@
             </style>
         `);
 
+        // Add this function to handle email field validation and section expansion
+        function validateEmailField() {
+            const emailField = document.getElementById('guest-email-input');
+            
+            if (!emailField.value || !emailField.checkValidity()) {
+                // Expand the Guest Information section if it's collapsed
+                const guestInfoContent = document.getElementById('guest-info-content');
+                const toggleButton = document.querySelector('.collapsible-toggle');
+                
+                if (guestInfoContent && guestInfoContent.style.display === "none") {
+                    // Show the section
+                    guestInfoContent.style.display = "block";
+                    
+                    // Update the arrow icon if it exists
+                    const arrowIcon = toggleButton.querySelector('.arrow-icon');
+                    if (arrowIcon) {
+                        arrowIcon.classList.add('expanded');
+                    }
+                    
+                    // Scroll to the section
+                    guestInfoContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                
+                // Show the modal for invalid email
+                document.getElementById('emailErrorModal').style.display = 'block';
+                
+                // Focus on the email field after showing the modal
+                setTimeout(() => {
+                    emailField.focus();
+                }, 100);
+                
+                return false;
+            }
+            
+            return true;
+        }
+
         window.submitPaymentForm = async function(cartId, parkId) {
             console.log("Submitting payment form...");
 
+            // Validate email field first - this will now expand the section if needed
+            if (!validateEmailField()) {
+                return; // Stop if email validation fails
+            }
+            
             var token = document.getElementById('mytoken').value;
             
             // Check card number token first, before creating the overlay
@@ -3863,6 +3967,12 @@
             // Validate the form fields
             if (!form.checkValidity()) {
                 form.reportValidity();
+                loadingOverlay.hide();
+                return;
+            }
+
+            // Validate email field
+            if (!validateEmailField()) {
                 loadingOverlay.hide();
                 return;
             }
@@ -4028,6 +4138,48 @@
                 document.getElementById('paymentErrorModal').style.display = 'block';
             }
         };
+
+        $(document).ready(function() {
+            // Add real-time validation for email field
+            $('#guest-email-input').on('input blur', function() {
+                const emailField = $(this);
+                const emailValue = emailField.val().trim();
+                
+                // Clear any existing validation styling
+                emailField.removeClass('invalid-input valid-input');
+                
+                if (!emailValue) {
+                    emailField.addClass('invalid-input');
+                } else if (!isValidEmail(emailValue)) {
+                    emailField.addClass('invalid-input');
+                } else {
+                    emailField.addClass('valid-input');
+                }
+            });
+            
+            // Helper function to validate email format
+            function isValidEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            }
+            
+            // When the email error modal is closed, make sure the section is expanded and the field is focused
+            $('#closeEmailModalButton').click(function(event) {
+                event.preventDefault();
+                closeModal('emailErrorModal');
+                
+                // Ensure guest info section is expanded
+                const guestInfoContent = document.getElementById('guest-info-content');
+                if (guestInfoContent.style.display === "none") {
+                    document.querySelector('.collapsible-toggle').click();
+                }
+                
+                // Focus on the email field
+                setTimeout(() => {
+                    document.getElementById('guest-email-input').focus();
+                }, 100);
+            });
+        });
     </script>
 </body>
 </html>
