@@ -687,6 +687,7 @@
     // Replace the existing parameter retrieval code
     const invoiceUUID = getParameterWithFallback('invoiceUUID');
     const parkId = getParameterWithFallback('parkId');
+    const environment = getParameterByName('environment') || 'campspot-staging'; // Default to 'staging' if not provided
 
     console.log('Park ID (final):', parkId);
     console.log('Invoice UUID (final):', invoiceUUID);
@@ -741,7 +742,7 @@
         setTimeout(function() {
             // Make the API call
             $.ajax({
-                url: 'https://insiderperks.com/wp-content/endpoints/campspot-staging/order-summary.php',
+                url: `https://insiderperks.com/wp-content/endpoints/${environment}/order-summary.php`,
                 method: 'GET',
                 data: {
                     parkId: "92",

@@ -2346,6 +2346,8 @@
     
     $fullAddress = "$address1, $city, $state $postal, $country";
 
+    $environment = $data['env'] ?? 'campspot-staging';
+
     // if ($parkId == 92) {
     //     $resortBaseUrl = "https://verderanchrvresort.com/";
     // }
@@ -2635,6 +2637,7 @@
     <script>
         let cartId, parkId, email;
         var smsMessage = <?php echo json_encode($smsMessage); ?>; // Convert PHP string to JS string
+        var environment = <?php echo json_encode($environment); ?>; // Convert PHP string to JS string
 
         // Modal close function
         function closeModal(modalId) {
@@ -3206,7 +3209,7 @@
                 overlay.show();
                 spinner.show();
 
-                const baseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/get-cart-checkout.php";
+                const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.php`;
                 const params = { cartId: cartId, parkId: parkId };
                 const queryString = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
                 const urlWithParams = `${baseUrl}?${queryString}`;
@@ -3460,7 +3463,7 @@
         $('#checkout-promo-code-input').after('<div id="promo-code-message"></div>');
 
         async function addPromo(promoCode) {
-            const baseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/add-promo.php";
+            const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/add-promo.php`;
             const addonData = {
                 parkId: parkId,
                 cartId: cartId,
@@ -3494,7 +3497,7 @@
                 // Wait for cart update before showing success message
                 if (data.status === 'success' && data.data.applied) {
                     // Fetch the updated cart with the new pricing
-                    const baseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/get-cart-checkout.php";
+                    const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.ph`;
                     const params = { cartId: cartId, parkId: parkId };
                     const queryString = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
                     const urlWithParams = `${baseUrl}?${queryString}`;
@@ -4071,6 +4074,7 @@
             };
 
             setLocalStorageWithExpiry('amount', selectedAmount);
+            setLocalStorageWithExpiry('environment', environment);
 
             // If billing info is different
             if (!$('#payment-billing-info-same-as-guest-info').is(':checked')) {
@@ -4096,7 +4100,7 @@
 
             try {
                 // Submit the payment request
-                const response = await fetch("https://insiderperks.com/wp-content/endpoints/campspot-staging/vapi-submit-card.php", {
+                const response = await fetch(`https://insiderperks.com/wp-content/endpoints/${environment}/vapi-submit-card.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
