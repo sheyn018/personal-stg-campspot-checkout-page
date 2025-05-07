@@ -676,7 +676,7 @@
         
         // Default fallback value
         const defaults = {
-            'parkId': "92",
+            'parkId': "",
             'invoiceUUID': ""
         };
         
@@ -745,7 +745,7 @@
                 url: `https://insiderperks.com/wp-content/endpoints/${environment}/order-summary.php`,
                 method: 'GET',
                 data: {
-                    parkId: "92",
+                    parkId: parkId,
                     invoiceUUID: invoiceUUID
                 },
                 beforeSend: function() {
