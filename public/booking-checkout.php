@@ -3497,7 +3497,7 @@
                 // Wait for cart update before showing success message
                 if (data.status === 'success' && data.data.applied) {
                     // Fetch the updated cart with the new pricing
-                    const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.ph`;
+                    const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.php`;
                     const params = { cartId: cartId, parkId: parkId };
                     const queryString = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
                     const urlWithParams = `${baseUrl}?${queryString}`;
