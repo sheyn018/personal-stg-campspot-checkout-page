@@ -3091,8 +3091,9 @@
             const pricePerNight = campsite.pricing.averagePricePerNightBeforeTaxesAndFees;
             const taxes = campsite.pricing.totalTaxes;
 
-            let lockFee, lockFeeTaxes, petFee, bookingFee, campFees, totalPrice;
+            let lockFee, lockFeeTaxes, petFee, bookingFee, campFees, totalPrice, allFees;
 
+            // Determine which fee set to use based on siteLock
             if (siteLock === 'true') {
                 lockFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithLockFee.find(fee => fee.feeType === "SITE_LOCK_FEE")?.price || 0;
                 lockFeeTaxes = campsite.pricing.feeSummary.lockFeeTaxes || 0;
@@ -3100,6 +3101,9 @@
                 bookingFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithLockFee.find(fee => fee.feeType === "SURCHARGES")?.price || 0;
                 campFees = campsite.pricing.feeSummary.totalCampgroundFeesWithLockFee + campsite.pricing.feeSummary.lockFeeTaxes;
                 totalPrice = campsite.pricing.tripTotalWithLockSiteFee;
+                
+                // Use entire itemizedCampgroundFeesWithLockFee array
+                allFees = campsite.pricing.feeSummary.itemizedCampgroundFeesWithLockFee || [];
             } else {
                 lockFee = 0;
                 lockFeeTaxes = 0;
@@ -3107,6 +3111,9 @@
                 bookingFee = campsite.pricing.feeSummary.itemizedCampgroundFeesWithoutLockFee.find(fee => fee.feeType === "SURCHARGES")?.price || 0;
                 campFees = campsite.pricing.feeSummary.totalCampgroundFeesWithoutLockFee;
                 totalPrice = campsite.pricing.tripTotal;
+                
+                // Use entire itemizedCampgroundFeesWithoutLockFee array
+                allFees = campsite.pricing.feeSummary.itemizedCampgroundFeesWithoutLockFee || [];
             }
 
             // Process all package discounts instead of just the first one
@@ -3191,6 +3198,7 @@
                 siteType,
                 dailyRateAddons,
                 onlineStoreAddons,
+                allFees,  // Make sure allFees is included here
                 ...(siteType === "rv" ? { rvInfo: campsite.rvInfo } : {}),
                 reservationDetailId
             };
@@ -3287,6 +3295,7 @@
             return hasValidDiscounts ? discountHtml : '';
         }
 
+        // Modified section of the displayAvailableCampsite function to include fee breakdown
         function displayAvailableCampsite(campsites, subTotal) {
             console.log('displayAvailableCampsite called with', campsites.length, 'campsites');
             const tbody = $('#order-summary-table-body');
@@ -3326,50 +3335,31 @@
                                     <!-- Detailed Cost Breakdown -->
                                     <div class="cost-breakdown" style="margin-top: 15px; border-top: 1px dotted #ddd; padding-top: 10px;">
                                         <div style="font-weight: 600; color: var(--primary); margin-bottom: 5px;">Cost Details:</div>
-                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                                            <span>Base Rate (${numberOfNights} nights):</span>
-                                            <span>$${(campsite.totalBaseRate).toFixed(2)}</span>
+
+                                        <!-- Base rate -->
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                            <span style="color: #4a5568;">Base Rate (${numberOfNights} Night${numberOfNights > 1 ? 's' : ''})</span>
+                                            <span style="font-weight: 500; color: var(--primary);">$${campsite.totalBaseRate.toFixed(2)}</span>
                                         </div>
-                                        
-                                        <!-- Pet Fees -->
-                                        ${campsite.pets > 0 ? 
-                                        `<div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                                            <span>Pet Fees:</span>
-                                            <span>$${campsite.petFee.toFixed(2)}</span>
-                                        </div>` : ''}
-                                        
-                                        <!-- Booking Fee -->
-                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                                            <span>Booking Fee:</span>
-                                            <span>$${campsite.bookingFee}</span>
-                                        </div>
-                                        
+
+                                        <!-- Dynamic fees will be inserted here -->
+                                        <div id="fee-breakdown-${index}" class="fee-breakdown"></div>
+
                                         <!-- Taxes -->
-                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                                            <span>Taxes:</span>
-                                            <span>$${campsite.taxes.toFixed(2)}</span>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                                            <span style="color: #4a5568;">Taxes</span>
+                                            <span style="font-weight: 500; color: var(--primary);">$${campsite.taxes.toFixed(2)}</span>
                                         </div>
-                                        
-                                        <!-- Site Lock Fee if applicable -->
-                                        ${campsite.siteLock === 'true' ? 
-                                        `<div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                                            <span>Site Lock Fee:</span>
-                                            <span>$${campsite.lockFee.toFixed(2)}</span>
-                                        </div>` : ''}
 
                                         <!-- Show lock fee taxes if applicable -->
                                         ${campsite.siteLock === 'true' ? 
-                                        `<div class="cost-item" style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                                            <span>Lock Fee Taxes:</span>
-                                            <span>$${campsite.lockFeeTaxes}</span>
+                                        `<div style="display: flex; justify-content: space-between; margin: 4px 0;">
+                                            <span style="color: #4a5568;">Lock Fee Taxes</span>
+                                            <span style="font-weight: 500; color: var(--primary);">$${campsite.lockFeeTaxes.toFixed(2)}</span>
                                         </div>` : ''}
-                                        
+
+                                        <!-- Discounts if any -->
                                         ${discountsHtml}
-                                        
-                                        <div class="cost-item" style="display: flex; justify-content: space-between; margin-top: 8px; border-top: 1px solid #ddd; padding-top: 8px; font-weight: 700; color: var(--primary);">
-                                            <span>Total:</span>
-                                            <span>$${campsite.totalPrice.toFixed(2)}</span>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -3377,56 +3367,105 @@
                     </table>
                 `);
                 tbody.append(row);
-
-                    // Display daily rate add-ons
-                    campsite.dailyRateAddons.forEach(addOn => {
-                        const addOnNights = Math.ceil((new Date(addOn.addOnCheckout) - new Date(addOn.addOnCheckin)) / (1000 * 60 * 60 * 24));
-                        const addOnRow = $(`
-                            <table class="checkout-summary-add-on checkout-summary-item">
-                                <tbody>
-                                    <tr>
-                                        <td class="checkout-summary-item-title">Add-on: ${addOn.addOnName}</td>
-                                        <td class="checkout-summary-item-price">$${addOn.addOnTotal.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="checkout-summary-item-details">${formatDateRange(new Date(addOn.addOnCheckin), new Date(addOn.addOnCheckout))} (${addOnNights} Nights)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        `);
-                        tbody.append(addOnRow);
-                    });
-
-                    // Display online store add-ons
-                    campsite.onlineStoreAddons.forEach(addOn => {
-                        const addOnRow = $(`
-                            <table class="checkout-summary-add-on checkout-summary-item">
-                                <tbody>
-                                    <tr>
-                                        <td class="checkout-summary-item-title app-checkout-pos-addon-display-name">Add-on: ${addOn.addOnName}</td>
-                                        <td class="checkout-summary-item-price app-checkout-pos-addon-trip-total">$${addOn.addOnTotal.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="checkout-summary-item-details">Quantity: ${addOn.addOnQuantity}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        `);
-                        tbody.append(addOnRow);
-                    });
-                });
-
-                // Update total display
-                $('#order-total').text(`$${subTotal.toFixed(2)}`);
                 
-                // Update payment amount displays
-                $(document).ready(function() {
-                    $('.checkout-form-payment-amount-selectable label.is-selected .checkout-form-payment-amount-selectable-value')
-                        .text(`$${parseFloat($('#order-total').text().replace('$','')).toFixed(2)}`);
+                // Populate the fee breakdown after the row is appended to the DOM
+                const feeBreakdownDiv = $(`#fee-breakdown-${index}`);
+                
+                // Updated styling for dynamic fee rows
+                if (campsite.allFees && campsite.allFees.length > 0) {
+                    // Loop through each fee and add it to the breakdown
+                    campsite.allFees.forEach(fee => {
+                        // Skip if price is 0
+                        if (fee.price === 0) return;
+                        
+                        const feeRow = $(`
+                            <div style="display: flex; justify-content: space-between; margin: 4px 0;">
+                                <span style="color: #4a5568;">${fee.name}</span>
+                                <span style="font-weight: 500; color: var(--primary);">$${fee.price.toFixed(2)}</span>
+                            </div>
+                        `);
+                        feeBreakdownDiv.append(feeRow);
+                    });
+                } else if (campsite.lockFee > 0) {
+                    // Fallback for when allFees isn't available but we have individual fee data
+                    const lockFeeRow = $(`
+                        <div style="display: flex; justify-content: space-between; margin: 4px 0;">
+                            <span style="color: #4a5568;">Site Lock Fee</span>
+                            <span style="font-weight: 500; color: var(--primary);">$${campsite.lockFee.toFixed(2)}</span>
+                        </div>
+                    `);
+                    feeBreakdownDiv.append(lockFeeRow);
+                    
+                    if (campsite.petFee > 0) {
+                        const petFeeRow = $(`
+                            <div style="display: flex; justify-content: space-between; margin: 4px 0;">
+                                <span style="color: #4a5568;">Pet Fee</span>
+                                <span style="font-weight: 500; color: var(--primary);">$${campsite.petFee.toFixed(2)}</span>
+                            </div>
+                        `);
+                        feeBreakdownDiv.append(petFeeRow);
+                    }
+                    
+                    if (campsite.bookingFee > 0) {
+                        const bookingFeeRow = $(`
+                            <div style="display: flex; justify-content: space-between; margin: 4px 0;">
+                                <span style="color: #000000;">Booking Fee</span>
+                                <span style="font-weight: 500; color: var(--primary);">$${campsite.bookingFee.toFixed(2)}</span>
+                            </div>
+                        `);
+                        feeBreakdownDiv.append(bookingFeeRow);
+                    }
+                }
 
-                    $('#payment-amount-partial-value').text(`$${$('#payment-amount-partial').data('partial-value')}`);
+                // Display daily rate add-ons
+                campsite.dailyRateAddons.forEach(addOn => {
+                    const addOnNights = Math.ceil((new Date(addOn.addOnCheckout) - new Date(addOn.addOnCheckin)) / (1000 * 60 * 60 * 24));
+                    const addOnRow = $(`
+                        <table class="checkout-summary-add-on checkout-summary-item">
+                            <tbody>
+                                <tr>
+                                    <td class="checkout-summary-item-title">Add-on: ${addOn.addOnName}</td>
+                                    <td class="checkout-summary-item-price">$${addOn.addOnTotal.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="checkout-summary-item-details">${formatDateRange(new Date(addOn.addOnCheckin), new Date(addOn.addOnCheckout))} (${addOnNights} Nights)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `);
+                    tbody.append(addOnRow);
                 });
-            }
+
+                // Display online store add-ons
+                campsite.onlineStoreAddons.forEach(addOn => {
+                    const addOnRow = $(`
+                        <table class="checkout-summary-add-on checkout-summary-item">
+                            <tbody>
+                                <tr>
+                                    <td class="checkout-summary-item-title app-checkout-pos-addon-display-name">Add-on: ${addOn.addOnName}</td>
+                                    <td class="checkout-summary-item-price app-checkout-pos-addon-trip-total">$${addOn.addOnTotal.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="checkout-summary-item-details">Quantity: ${addOn.addOnQuantity}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `);
+                    tbody.append(addOnRow);
+                });
+            });
+
+            // Update total display
+            $('#order-total').text(`$${subTotal.toFixed(2)}`);
+            
+            // Update payment amount displays
+            $(document).ready(function() {
+                $('.checkout-form-payment-amount-selectable label.is-selected .checkout-form-payment-amount-selectable-value')
+                    .text(`$${parseFloat($('#order-total').text().replace('$','')).toFixed(2)}`);
+
+                $('#payment-amount-partial-value').text(`$${$('#payment-amount-partial').data('partial-value')}`);
+            });
+        }
 
             function formatDateRange(startDate, endDate) {
                 // Increment the start date by 1 day
