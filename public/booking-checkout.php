@@ -586,6 +586,38 @@
             color: var(--primary) !important;
         }
 
+        /* Cost External Breakdown */
+        .checkout-summary-external-charges {
+            margin-top: 15px !important;
+            background-color: rgba(5, 54, 65, 0.03) !important;
+            border-radius: 8px !important;
+            padding: 12px 15px 15px !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .checkout-summary-external-charges::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 4px !important;
+            height: 100% !important;
+            background: var(--secondary) !important;
+        }
+
+        .fee-help-text {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        /* Show help text on hover */
+        .checkout-summary-item-title:hover .fee-help-text {
+            max-height: 200px;
+            transition: max-height 0.5s ease-in;
+        }
+
         /* Accent the cardholder form */
         #payment-expiration-date .checkout-form-field-cc-exp {
             border: 2px solid #e2e8f0 !important;
@@ -3206,9 +3238,15 @@
 
         async function fetchCart() {
             let storedCartData = localStorage.getItem('cartData');
-            let storedSubTotal = localStorage.getItem('subTotal');
+            let storedSubTotal = localStorage.getItem('grandTotal');
+            let storedParkName = localStorage.getItem('parkName');
+            let storedExternalCharges = localStorage.getItem('externalCharges');
 
             if (storedCartData && storedSubTotal) {
+                // Set global variables from localStorage if available
+                window.parkName = storedParkName || '';
+                // Properly parse the external charges from localStorage
+                window.externalCharges = storedExternalCharges ? JSON.parse(storedExternalCharges) : [];
                 displayAvailableCampsite(JSON.parse(storedCartData), parseFloat(storedSubTotal));
             } else {
                 const overlay = $('.overlay');
@@ -3225,11 +3263,28 @@
                 try {
                     const response = await fetch(urlWithParams);
                     const cart = await response.json();
-                    console.log(cart);
+                    console.log("Cart response:", cart);
 
                     const minimumPayment = cart.minimumPayment?.minimumPayment || 0;
                     const campsites = cart.cart.parkShoppingCarts[parkId].shoppingCartItems || [];
-                    const subTotal = cart.cart.parkShoppingCarts[parkId].subtotal || 0;
+                    const grandTotal = cart.cart.parkShoppingCarts[parkId].grandTotal || 0;
+                    
+                    // Store park name globally
+                    window.parkName = cart.cart.parkShoppingCarts[parkId].parkName || '';
+                    
+                    // Specifically extract the externalCharges from the correct location in the JSON
+                    window.externalCharges = cart.cart.parkShoppingCarts[parkId].externalCharges || [];
+                    console.log("External charges found:", window.externalCharges);
+                    
+                    // Store in localStorage for future use - ensure we stringify the array properly
+                    localStorage.setItem('parkName', window.parkName);
+                    localStorage.setItem('externalCharges', JSON.stringify(window.externalCharges));
+                    
+                    // After the cart data is loaded, update the checkout heading to include park name
+                    if (window.parkName) {
+                        updateCheckoutHeading(window.parkName);
+                    }
+                    
                     let filteredCampsites = [];
 
                     if (campsites.length) {
@@ -3239,16 +3294,42 @@
                         }
                     }
 
+                    // Store processed campsites and grand total for future use
+                    localStorage.setItem('cartData', JSON.stringify(filteredCampsites));
+                    localStorage.setItem('grandTotal', grandTotal);
+                    
                     allCampsites = filteredCampsites;
 
-                    displayAvailableCampsite(allCampsites, subTotal);
-                    updatePaymentAmount(subTotal, minimumPayment);
+                    displayAvailableCampsite(allCampsites, grandTotal);
+                    updatePaymentAmount(grandTotal, minimumPayment);
                 } catch (error) {
                     console.error('Error fetching campground data:', error);
                 } finally {
                     overlay.hide();
                     spinner.hide();
                 }
+            }
+        }
+
+        function updateCheckoutHeading(parkName) {
+            // Check if parkName subtitle already exists
+            if ($('.park-name-subtitle').length === 0 && parkName) {
+                $('.checkout-heading-title').after(`
+                    <h2 class="park-name-subtitle">${parkName}</h2>
+                `);
+                
+                // Add some CSS for the park name subtitle
+                $('head').append(`
+                    <style>
+                        .park-name-subtitle {
+                            color: var(--secondary);
+                            font-size: 1.2rem;
+                            margin-top: 0.5rem;
+                            margin-bottom: 1.5rem;
+                            font-weight: 500;
+                        }
+                    </style>
+                `);
             }
         }
 
@@ -3296,19 +3377,16 @@
         }
 
         // Modified section of the displayAvailableCampsite function to include fee breakdown
-        function displayAvailableCampsite(campsites, subTotal) {
+        function displayAvailableCampsite(campsites, grandTotal) {
             console.log('displayAvailableCampsite called with', campsites.length, 'campsites');
             const tbody = $('#order-summary-table-body');
             tbody.empty();
-
+            
             campsites.forEach((campsite, index) => {
                 console.log(`Processing campsite ${index}:`, campsite.campsiteName);
                 
                 const numberOfNights = Math.ceil((new Date(campsite.checkout) - new Date(campsite.checkin)) / (1000 * 60 * 60 * 24));
                 const discountsHtml = displayDiscounts(campsite.discounts);
-                
-                // Calculate subtotal before taxes and fees
-                const baseRate = campsite.pricePerNight * numberOfNights;
                 
                 // Build the row with expanded pricing details
                 const row = $(`
@@ -3344,6 +3422,9 @@
 
                                         <!-- Dynamic fees will be inserted here -->
                                         <div id="fee-breakdown-${index}" class="fee-breakdown"></div>
+                                        
+                                        <!-- Additional charges section will be inserted here if applicable -->
+                                        <div id="additional-charges-${index}" class="additional-charges-breakdown"></div>
 
                                         <!-- Taxes -->
                                         <div style="display: flex; justify-content: space-between; margin-top: 8px;">
@@ -3417,6 +3498,36 @@
                     }
                 }
 
+                // Add external charges to the first campsite
+                if (index === 0 && window.externalCharges && window.externalCharges.length > 0) {
+                    console.log("Adding external charges:", window.externalCharges);
+                    const additionalChargesDiv = $(`#additional-charges-${index}`);
+                    
+                    // Add a subheader for additional charges
+                    additionalChargesDiv.append(`
+                        <div style="font-weight: 600; color: var(--secondary); margin: 12px 0 5px; border-top: 1px dashed rgba(5, 54, 65, 0.15); padding-top: 8px;">
+                            Additional Charges:
+                        </div>
+                    `);
+                    
+                    // Add each external charge
+                    window.externalCharges.forEach(charge => {
+                        console.log("Processing external charge:", charge);
+                        const chargeRow = $(`
+                            <div style="display: flex; justify-content: space-between; margin: 4px 0;">
+                                <span style="color: #4a5568; display: flex; flex-direction: column;">
+                                    ${charge.name}
+                                    ${charge.helpText ? 
+                                    `<div class="fee-help-text" style="font-size: 0.75rem; color: #666; font-style: italic; max-height: 0; overflow: hidden;">${charge.helpText}</div>` : 
+                                    ''}
+                                </span>
+                                <span style="font-weight: 500; color: var(--primary);">$${parseFloat(charge.price).toFixed(2)}</span>
+                            </div>
+                        `);
+                        additionalChargesDiv.append(chargeRow);
+                    });
+                }
+
                 // Display daily rate add-ons
                 campsite.dailyRateAddons.forEach(addOn => {
                     const addOnNights = Math.ceil((new Date(addOn.addOnCheckout) - new Date(addOn.addOnCheckin)) / (1000 * 60 * 60 * 24));
@@ -3455,8 +3566,8 @@
                 });
             });
 
-            // Update total display
-            $('#order-total').text(`$${subTotal.toFixed(2)}`);
+             // Update total display
+            $('#order-total').text(`$${grandTotal.toFixed(2)}`);
             
             // Update payment amount displays
             $(document).ready(function() {
@@ -3467,37 +3578,67 @@
             });
         }
 
-            function formatDateRange(startDate, endDate) {
-                // Increment the start date by 1 day
-                startDate = incrementDate(startDate);
-                endDate = incrementDate(endDate);
-                const options = { weekday: 'short', month: 'short', day: 'numeric' };
-                const start = startDate.toLocaleDateString('en-US', options);
-                const end = endDate.toLocaleDateString('en-US', options);
-                return `${start} - ${end}`;
-            }
+        // Debug function to check external charges
+        function checkExternalCharges() {
+            console.log("Current external charges:", window.externalCharges);
+            const storedCharges = localStorage.getItem('externalCharges');
+            console.log("External charges in localStorage:", storedCharges ? JSON.parse(storedCharges) : 'None');
+        }
 
-            function incrementDate(date) {
-                // Create a new Date object based on the input date
-                let newDate = new Date(date);
-                // Increment the date by 1
-                newDate.setDate(newDate.getDate() + 1);
-                return newDate;
-            }
+        // Call this debug function after initial load
+        $(document).ready(function() {
+            // Existing document.ready code...
+            
+            // Set a timeout to check external charges after everything else has loaded
+            setTimeout(checkExternalCharges, 2000);
+            
+            // Add hover behavior for fee help text
+            $(document).on('mouseenter', '.checkout-summary-item [style*="color: #4a5568"]', function() {
+                $(this).find('.fee-help-text').css({
+                    'max-height': '200px',
+                    'margin-top': '5px',
+                    'transition': 'max-height 0.3s ease-in, margin-top 0.3s ease-in'
+                });
+            }).on('mouseleave', '.checkout-summary-item [style*="color: #4a5568"]', function() {
+                $(this).find('.fee-help-text').css({
+                    'max-height': '0',
+                    'margin-top': '0',
+                    'transition': 'max-height 0.3s ease-out, margin-top 0.3s ease-out'
+                });
+            });
+        });
 
-            function formatGuests(adults, children, pets) {
-                let guestText = '';
-                if (adults > 0) guestText += `${adults} Adult${adults > 1 ? 's' : ''}`;
-                if (children > 0) {
-                    if (guestText) guestText += ', ';
-                    guestText += `${children} Child${children > 1 ? 'ren' : ''}`;
-                }
-                if(pets > 0) {
-                    if (guestText) guestText += ', ';
-                    guestText += `${pets} Pet${pets > 1 ? 's' : ''}`;
-                }
-                return guestText;
+        function formatDateRange(startDate, endDate) {
+            // Increment the start date by 1 day
+            startDate = incrementDate(startDate);
+            endDate = incrementDate(endDate);
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            const start = startDate.toLocaleDateString('en-US', options);
+            const end = endDate.toLocaleDateString('en-US', options);
+            return `${start} - ${end}`;
+        }
+
+        function incrementDate(date) {
+            // Create a new Date object based on the input date
+            let newDate = new Date(date);
+            // Increment the date by 1
+            newDate.setDate(newDate.getDate() + 1);
+            return newDate;
+        }
+
+        function formatGuests(adults, children, pets) {
+            let guestText = '';
+            if (adults > 0) guestText += `${adults} Adult${adults > 1 ? 's' : ''}`;
+            if (children > 0) {
+                if (guestText) guestText += ', ';
+                guestText += `${children} Child${children > 1 ? 'ren' : ''}`;
             }
+            if(pets > 0) {
+                if (guestText) guestText += ', ';
+                guestText += `${pets} Pet${pets > 1 ? 's' : ''}`;
+            }
+            return guestText;
+        }
 
         $('#checkout-promo-code-input').after('<div id="promo-code-message"></div>');
 
@@ -3545,12 +3686,12 @@
                     const cart = await cartResponse.json();
                     console.log("Updated cart after promo:", cart);
                     
-                    // Extract the minimum payment and subtotal from the updated cart
+                    // Extract the minimum payment and grandTotal from the updated cart
                     const minimumPayment = cart.minimumPayment?.minimumPayment || 0.00;
-                    const subTotal = cart.cart.parkShoppingCarts[parkId].subtotal || 0.00;
+                    const grandTotal = cart.cart.parkShoppingCarts[parkId].grandTotal || 0.00;
                     
                     console.log("New minimum payment after promo:", minimumPayment);
-                    console.log("New subtotal after promo:", subTotal);
+                    console.log("New grandTotal after promo:", grandTotal);
                     
                     // Process campsites for display
                     const campsites = cart.cart.parkShoppingCarts[parkId].shoppingCartItems || [];
@@ -3564,8 +3705,8 @@
                     }
                     
                     // Force UI update with direct DOM manipulation
-                    $('#order-total').text(`$${subTotal.toFixed(2)}`);
-                    $('#total-balance-placeholder').text(`$${subTotal.toFixed(2)}`);
+                    $('#order-total').text(`$${grandTotal.toFixed(2)}`);
+                    $('#total-balance-placeholder').text(`$${grandTotal.toFixed(2)}`);
                     
                     // Update the partial payment amount
                     $('#payment-amount-partial-value').text(`$${minimumPayment.toFixed(2)}`);
@@ -3575,10 +3716,10 @@
                     $('#payment-amount-total')
                         .closest('.checkout-form-payment-amount-selectable')
                         .find('.checkout-form-payment-amount-selectable-value')
-                        .text(`$${subTotal.toFixed(2)}`);
+                        .text(`$${grandTotal.toFixed(2)}`);
                     
                     // Update the display with the new campsites data
-                    displayAvailableCampsite(filteredCampsites, subTotal);
+                    displayAvailableCampsite(filteredCampsites, grandTotal);
                     
                     messageElement.text('Promo code applied successfully!').css({
                         'color': 'green',
@@ -3634,24 +3775,24 @@
             });
         });
 
-        function updatePaymentAmount(subTotal, minimumPayment = null) {
+        function updatePaymentAmount(grandTotal, minimumPayment = null) {
             console.log("Updating payment amount...");
 
             // Ensure elements exist before updating
             if ($('#order-total').length) {
-                $('#order-total').text(`$${subTotal.toFixed(2)}`);
+                $('#order-total').text(`$${grandTotal.toFixed(2)}`);
             }
 
             if ($('.checkout-form-payment-amount-selectable-value').length) {
                 $('.checkout-form-payment-amount-selectable label.is-selected .checkout-form-payment-amount-selectable-value')
-                    .text(`$${subTotal.toFixed(2)}`);
+                    .text(`$${grandTotal.toFixed(2)}`);
             }
 
             // ✅ Update "Pay Total Balance"
             if ($('#payment-amount-total').length) {
                 $('#payment-amount-total').closest('.checkout-form-payment-amount-selectable')
                     .find('.checkout-form-payment-amount-selectable-value')
-                    .text(`$${subTotal.toFixed(2)}`);
+                    .text(`$${grandTotal.toFixed(2)}`);
             }
 
             // ✅ Update "Pay Partial Balance"
@@ -3724,7 +3865,7 @@
 
             // ✅ Ensure UI updates properly after page load
             setTimeout(() => {
-                const subTotal = parseFloat($('#order-total').text().replace('$', '')) || 0;
+                const grandTotal = parseFloat($('#order-total').text().replace('$', '')) || 0;
                 const minPayment = parseFloat($('#payment-amount-partial-value').text().replace('$', '')) || 0;
             }, 1000); // Delay ensures DOM is ready
         });
