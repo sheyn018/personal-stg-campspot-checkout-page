@@ -3312,24 +3312,130 @@
         }
 
         function updateCheckoutHeading(parkName) {
-            // Check if parkName subtitle already exists
-            if ($('.park-name-subtitle').length === 0 && parkName) {
-                $('.checkout-heading-title').after(`
-                    <h2 class="park-name-subtitle">${parkName}</h2>
+            // Remove any existing park name element first to avoid duplication
+            $('.park-name-header').remove();
+            
+            if (parkName) {
+                // Restructure the checkout heading with better text hierarchy and contrast
+                $('.checkout-heading').html(`
+                    <div class="park-name-header">
+                        <div class="park-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2L1 7v2h22V7L12 2zm-1 14h2v7h3v-7h2v7h2V9H6v14h2v-7h3v-7z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="park-header-content">
+                            <h1 class="checkout-heading-title">Checkout</h1>
+                            <div class="park-name">${parkName}</div>
+                        </div>
+                    </div>
                 `);
                 
-                // Add some CSS for the park name subtitle
-                $('head').append(`
-                    <style>
-                        .park-name-subtitle {
-                            color: var(--secondary);
-                            font-size: 1.2rem;
-                            margin-top: 0.5rem;
-                            margin-bottom: 1.5rem;
-                            font-weight: 500;
-                        }
-                    </style>
-                `);
+                // Add the CSS styles for the new header
+                if (!$('#park-name-styles').length) {
+                    $('head').append(`
+                        <style id="park-name-styles">
+                            .park-name-header {
+                                background: linear-gradient(to right, var(--primary), var(--primary-light));
+                                color: white;
+                                padding: 18px 24px;
+                                border-radius: 12px;
+                                margin-bottom: 30px;
+                                display: flex;
+                                align-items: center;
+                                box-shadow: 0 6px 16px rgba(5, 54, 65, 0.18);
+                                position: relative;
+                                overflow: hidden;
+                            }
+                            
+                            .park-name-header::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                bottom: 0;
+                                width: 200px;
+                                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1));
+                                z-index: 1;
+                            }
+                            
+                            .park-header-content {
+                                display: flex;
+                                flex-direction: column;
+                            }
+                            
+                            .checkout-heading-title {
+                                font-size: 1.5rem !important;
+                                font-weight: 700 !important;
+                                margin: 0 !important;
+                                line-height: 1.3 !important;
+                                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+                            }
+                            
+                            .park-name {
+                                font-size: 1.1rem !important;
+                                font-weight: 400 !important;
+                                margin: 4px 0 0 0 !important;
+                                opacity: 0.9;
+                                line-height: 1.2 !important;
+                            }
+                            
+                            .park-icon {
+                                margin-right: 16px;
+                                background-color: rgba(255, 255, 255, 0.2);
+                                border-radius: 50%;
+                                width: 48px;
+                                height: 48px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                flex-shrink: 0;
+                            }
+                            
+                            .park-icon svg {
+                                width: 28px;
+                                height: 28px;
+                                color: white;
+                            }
+                            
+                            /* Add a subtle animation to the header */
+                            @keyframes subtle-glow {
+                                0%, 100% { box-shadow: 0 6px 16px rgba(5, 54, 65, 0.18); }
+                                50% { box-shadow: 0 8px 24px rgba(5, 54, 65, 0.25); }
+                            }
+                            
+                            .park-name-header {
+                                animation: subtle-glow 5s infinite;
+                            }
+                            
+                            @media (max-width: 767px) {
+                                .park-name-header {
+                                    padding: 16px 18px;
+                                    margin-bottom: 24px;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    text-align: center;
+                                }
+                                
+                                .park-icon {
+                                    margin-right: 0;
+                                    margin-bottom: 12px;
+                                }
+                                
+                                .checkout-heading-title {
+                                    font-size: 1.4rem !important;
+                                }
+                                
+                                .park-name {
+                                    font-size: 1rem !important;
+                                }
+                            }
+                        </style>
+                    `);
+                }
+            } else {
+                // If no park name, restore original checkout heading
+                $('.checkout-heading').html('<h1 class="checkout-heading-title app-heading-title">Checkout</h1>');
             }
         }
 
@@ -3501,16 +3607,8 @@
                 // Add external charges to the first campsite
                 if (index === 0 && window.externalCharges && window.externalCharges.length > 0) {
                     console.log("Adding external charges:", window.externalCharges);
-                    const additionalChargesDiv = $(`#additional-charges-${index}`);
                     
-                    // Add a subheader for additional charges
-                    additionalChargesDiv.append(`
-                        <div style="font-weight: 600; color: var(--secondary); margin: 12px 0 5px; border-top: 1px dashed rgba(5, 54, 65, 0.15); padding-top: 8px;">
-                            Additional Charges:
-                        </div>
-                    `);
-                    
-                    // Add each external charge
+                    // Add each external charge directly to the fee breakdown section
                     window.externalCharges.forEach(charge => {
                         console.log("Processing external charge:", charge);
                         const chargeRow = $(`
@@ -3524,7 +3622,7 @@
                                 <span style="font-weight: 500; color: var(--primary);">$${parseFloat(charge.price).toFixed(2)}</span>
                             </div>
                         `);
-                        additionalChargesDiv.append(chargeRow);
+                        feeBreakdownDiv.append(chargeRow);
                     });
                 }
 
