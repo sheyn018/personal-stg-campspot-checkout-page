@@ -203,7 +203,7 @@
         .checkout-heading-title {
             font-size: 2.5rem !important;
             font-weight: 600 !important;
-            color: var(--primary) !important;
+            color: var(--primary-bg) !important;
             margin-bottom: 1.5rem !important;
             border-bottom: 3px solid var(--secondary) !important;
             padding-bottom: 0.5rem !important;
@@ -3435,7 +3435,7 @@
                 }
             } else {
                 // If no park name, restore original checkout heading
-                $('.checkout-heading').html('<h1 class="checkout-heading-title app-heading-title">Checkout</h1>');
+                $('.checkout-heading').html('<h1 class="checkout-heading-title app-heading-title" style="color: var(--primary) !important">Checkout</h1>');
             }
         }
 
