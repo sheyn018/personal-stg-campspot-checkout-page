@@ -2707,6 +2707,18 @@
             $(this).closest('.modal').hide();
         });
 
+        // Add this code to handle the radio button selection for payment amount
+        $(document).ready(function() {
+            // Handle payment amount radio button selection
+            $('input[name="payment_amount"]').on('change', function() {
+                // Remove 'is-selected' class from all payment amount containers
+                $('.checkout-form-payment-amount-selectable').removeClass('is-selected');
+                
+                // Add 'is-selected' class to the container of the selected radio
+                $(this).closest('.checkout-form-payment-amount-selectable').addClass('is-selected');
+            });
+        });
+
         // Function to get 'cartId' from the URL
         function getCartIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
