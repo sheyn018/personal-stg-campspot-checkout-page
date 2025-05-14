@@ -3237,6 +3237,7 @@
         }
 
         async function fetchCart() {
+            console.log("Getting cart data...");
             let storedCartData = localStorage.getItem('cartData');
             let storedSubTotal = localStorage.getItem('grandTotal');
             let storedParkName = localStorage.getItem('parkName');
@@ -3263,7 +3264,7 @@
                 try {
                     const response = await fetch(urlWithParams);
                     const cart = await response.json();
-                    console.log("Cart response:", cart);
+                    console.log("CART DATA:", cart);
 
                     const minimumPayment = cart.minimumPayment?.minimumPayment || 0;
                     const campsites = cart.cart.parkShoppingCarts[parkId].shoppingCartItems || [];
@@ -3478,19 +3479,15 @@
             
             // Only return the HTML if there are discounts with a non-zero price
             const hasValidDiscounts = discounts.some(d => d.name && d.price !== 0);
-            console.log('Has valid discounts:', hasValidDiscounts);
             return hasValidDiscounts ? discountHtml : '';
         }
 
         // Modified section of the displayAvailableCampsite function to include fee breakdown
         function displayAvailableCampsite(campsites, grandTotal) {
-            console.log('displayAvailableCampsite called with', campsites.length, 'campsites');
             const tbody = $('#order-summary-table-body');
             tbody.empty();
             
             campsites.forEach((campsite, index) => {
-                console.log(`Processing campsite ${index}:`, campsite.campsiteName);
-                
                 const numberOfNights = Math.ceil((new Date(campsite.checkout) - new Date(campsite.checkin)) / (1000 * 60 * 60 * 24));
                 const discountsHtml = displayDiscounts(campsite.discounts);
                 
@@ -3606,11 +3603,8 @@
 
                 // Add external charges to the first campsite
                 if (index === 0 && window.externalCharges && window.externalCharges.length > 0) {
-                    console.log("Adding external charges:", window.externalCharges);
-                    
                     // Add each external charge directly to the fee breakdown section
                     window.externalCharges.forEach(charge => {
-                        console.log("Processing external charge:", charge);
                         const chargeRow = $(`
                             <div style="display: flex; justify-content: space-between; margin: 4px 0;">
                                 <span style="color: #4a5568; display: flex; flex-direction: column;">
@@ -3680,7 +3674,6 @@
         function checkExternalCharges() {
             console.log("Current external charges:", window.externalCharges);
             const storedCharges = localStorage.getItem('externalCharges');
-            console.log("External charges in localStorage:", storedCharges ? JSON.parse(storedCharges) : 'None');
         }
 
         // Call this debug function after initial load
@@ -3770,7 +3763,6 @@
                 }
 
                 const data = await response.json();
-                console.log('Promo code data:', data);
 
                 // Wait for cart update before showing success message
                 if (data.status === 'success' && data.data.applied) {
@@ -3874,8 +3866,6 @@
         });
 
         function updatePaymentAmount(grandTotal, minimumPayment = null) {
-            console.log("Updating payment amount...");
-
             // Ensure elements exist before updating
             if ($('#order-total').length) {
                 $('#order-total').text(`$${grandTotal.toFixed(2)}`);
@@ -3916,7 +3906,7 @@
         parkId = getParkIdFromUrl();
 
         email = email;
-        console.log('cartId:', cartId, 'parkId:', parkId, 'email:', email);
+        console.log('cartId:', cartId, 'parkId:', parkId);
 
         // Handle SMS message checkbox
         $('#checkout-form-field-text-opt-in').change(function () {
@@ -3956,12 +3946,10 @@
         }
 
         $(document).ready(function () {
-            console.log("Page loaded, fetching cart data...");
-            
-            // ✅ Fetch the cart on page load
+            // Fetch the cart on page load
             fetchCart();
 
-            // ✅ Ensure UI updates properly after page load
+            // Ensure UI updates properly after page load
             setTimeout(() => {
                 const grandTotal = parseFloat($('#order-total').text().replace('$', '')) || 0;
                 const minPayment = parseFloat($('#payment-amount-partial-value').text().replace('$', '')) || 0;
@@ -4218,8 +4206,6 @@
         }
 
         window.submitPaymentForm = async function(cartId, parkId) {
-            console.log("Submitting payment form...");
-
             // Validate email field first - this will now expand the section if needed
             if (!validateEmailField()) {
                 return; // Stop if email validation fails
@@ -4281,7 +4267,7 @@
 
             // Ensure the latest amount is used
             const selectedAmount = getSelectedPaymentAmount();
-            console.log("DEBUG: Payment Amount Sent: ", selectedAmount);
+            console.log("Payment Amount Sent: ", selectedAmount);
 
             // Get the checkbox element
             var termsCheckbox = document.getElementById('terms-and-conditions-accept');
