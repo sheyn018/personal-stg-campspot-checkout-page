@@ -2375,27 +2375,11 @@
     $sourceReferral = ($data['sr'] ?? '') === '0' ? 'N/A' : ($data['sr'] ?? 'N/A');
     $reasonStay = ($data['rs'] ?? '') === '0' ? 'N/A' : ($data['rs'] ?? 'N/A');
     $bookingNeed = ($data['bn'] ?? '') === '0' ? 'N/A' : ($data['bn'] ?? 'N/A');
+    $rvYear = ($data['ry'] ?? '') === '0' ? 'N/A' : ($data['ry'] ?? 'N/A');
     
     $fullAddress = "$address1, $city, $state $postal, $country";
 
     $environment = $data['env'] ?? 'campspot-staging';
-
-    // if ($parkId == 92) {
-    //     $resortBaseUrl = "https://verderanchrvresort.com/";
-    // }
-
-    // else if ($parkId == 1746) {
-    //     $resortBaseUrl = "https://coachellalakesrvresort.com/";
-    // }
-
-    // else if ($parkId == 2312) {
-    //     $resortBaseUrl = "https://savannahlakesrvresort.com/";
-    // }
-
-    // else if ($parkId == 491) {
-    //     $resortBaseUrl = "https://riversandsrvresort.com/cancellation-policy/";
-    // }
-    
     ?>
 
     <div class="page-loader">
@@ -2669,8 +2653,9 @@
     <script>
         let cartId, parkId, email;
         var smsMessage = <?php echo json_encode($smsMessage); ?>; // Convert PHP string to JS string
+        var rvYear = <?php echo json_encode($rvYear); ?>; // Convert PHP string to JS string
         var environment = <?php echo json_encode($environment); ?>; // Convert PHP string to JS string
-
+        
         // Modal close function
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
@@ -4333,7 +4318,7 @@
                 guestPhone: $('#guest-phone-number-input').val(),
                 reasonForVisit: $('#guest-reason-for-visit').val(),
                 referralSource: $('#guest-referral-source').val(),
-                specialRequest: $('#guest-reservation-note').val(),
+                specialRequest: $('#guest-reservation-note').val() + (rvYear ? "\nRV Year: " + rvYear : ""),
                 shippingName: $('#guest-full-name-input').val(),
                 stateProvinceOrRegion: $('#guest-state-select').val(),
                 shippingType: "SHIPPING",
