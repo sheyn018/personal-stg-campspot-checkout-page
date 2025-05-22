@@ -1,3 +1,47 @@
+<?php
+    // Start output buffering at the very beginning
+    ob_start();
+    
+    // Prevent caching to ensure fresh content on each page load
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+    function decryptData($token)
+    {
+        $decoded = base64_decode($token); // Decode Base64
+        return json_decode($decoded, true); // Convert JSON string back to an array
+    }
+    
+    // Get parameters from URL
+    $parkId = $_GET['parkId'] ?? '';
+    $parkSlug = $_GET['parkSlug'] ?? '';
+    $cartId = $_GET['cartId'] ?? '';
+    $token = $_GET['token'] ?? null;
+    
+    // Decode token and retrieve data
+    $data = $token ? decryptData($token) : [];
+    
+    // Extract parameters with default values
+    $name = $data['n'] ?? '';
+    $state = $data['s'] ?? 'California';
+    $country = $data['c'] ?? 'United States';
+    $city = $data['ct'] ?? 'Alabama';
+    $address1 = $data['a'] ?? '';
+    $postal = $data['pc'] ?? '';
+    $email = $data['e'] ?? '';
+    $phone = $data['p'] ?? '';
+    $smsMessage = $data['sm'] ?? '';
+    $sourceReferral = ($data['sr'] ?? '') === '0' ? 'N/A' : ($data['sr'] ?? 'N/A');
+    $reasonStay = ($data['rs'] ?? '') === '0' ? 'N/A' : ($data['rs'] ?? 'N/A');
+    $bookingNeed = ($data['bn'] ?? '') === '0' ? 'N/A' : ($data['bn'] ?? 'N/A');
+    $rvYear = ($data['ry'] ?? '') === '0' ? 'N/A' : ($data['ry'] ?? 'N/A');
+    
+    $fullAddress = "$address1, $city, $state $postal, $country";
+
+    $environment = $data['env'] ?? 'campspot-staging';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2346,42 +2390,6 @@
     </style>
 </head>
 <body>
-<?php
-    function decryptData($token)
-    {
-        $decoded = base64_decode($token); // Decode Base64
-        return json_decode($decoded, true); // Convert JSON string back to an array
-    }
-    
-    // Get parameters from URL
-    $parkId = $_GET['parkId'] ?? '';
-    $parkSlug = $_GET['parkSlug'] ?? '';
-    $cartId = $_GET['cartId'] ?? '';
-    $token = $_GET['token'] ?? null;
-    
-    // Decode token and retrieve data
-    $data = $token ? decryptData($token) : [];
-    
-    // Extract parameters with default values
-    $name = $data['n'] ?? '';
-    $state = $data['s'] ?? 'California';
-    $country = $data['c'] ?? 'United States';
-    $city = $data['ct'] ?? 'Alabama';
-    $address1 = $data['a'] ?? '';
-    $postal = $data['pc'] ?? '';
-    $email = $data['e'] ?? '';
-    $phone = $data['p'] ?? '';
-    $smsMessage = $data['sm'] ?? '';
-    $sourceReferral = ($data['sr'] ?? '') === '0' ? 'N/A' : ($data['sr'] ?? 'N/A');
-    $reasonStay = ($data['rs'] ?? '') === '0' ? 'N/A' : ($data['rs'] ?? 'N/A');
-    $bookingNeed = ($data['bn'] ?? '') === '0' ? 'N/A' : ($data['bn'] ?? 'N/A');
-    $rvYear = ($data['ry'] ?? '') === '0' ? 'N/A' : ($data['ry'] ?? 'N/A');
-    
-    $fullAddress = "$address1, $city, $state $postal, $country";
-
-    $environment = $data['env'] ?? 'campspot-staging';
-    ?>
-
     <div class="page-loader">
         <div class="loader-spinner"></div>
         <div class="loader-text">Loading checkout information...</div>
@@ -3235,79 +3243,148 @@
 
         async function fetchCart() {
             console.log("Getting cart data...");
-            let storedCartData = localStorage.getItem('cartData');
-            let storedSubTotal = localStorage.getItem('grandTotal');
-            let storedParkName = localStorage.getItem('parkName');
-            let storedExternalCharges = localStorage.getItem('externalCharges');
+            
+            // Clear localStorage on each fetch to prevent stale data
+            localStorage.removeItem('cartData');
+            localStorage.removeItem('grandTotal');
+            localStorage.removeItem('parkName');
+            localStorage.removeItem('externalCharges');
+            
+            const overlay = $('.overlay');
+            const spinner = $('.spinner');
 
-            if (storedCartData && storedSubTotal) {
-                // Set global variables from localStorage if available
-                window.parkName = storedParkName || '';
-                // Properly parse the external charges from localStorage
-                window.externalCharges = storedExternalCharges ? JSON.parse(storedExternalCharges) : [];
-                displayAvailableCampsite(JSON.parse(storedCartData), parseFloat(storedSubTotal));
-            } else {
-                const overlay = $('.overlay');
-                const spinner = $('.spinner');
+            overlay.show();
+            spinner.show();
 
-                overlay.show();
-                spinner.show();
+            // Add timestamp parameter for cache busting
+            const timestamp = new Date().getTime();
+            const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.php`;
+            const params = { cartId: cartId, parkId: parkId, t: timestamp };
+            const queryString = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
+            const urlWithParams = `${baseUrl}?${queryString}`;
 
-                const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.php`;
-                const params = { cartId: cartId, parkId: parkId };
-                const queryString = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
-                const urlWithParams = `${baseUrl}?${queryString}`;
+            console.log("Fetching cart from URL:", urlWithParams);
 
-                try {
-                    const response = await fetch(urlWithParams);
-                    const cart = await response.json();
-                    console.log("CART DATA:", cart);
-
-                    const minimumPayment = cart.minimumPayment?.minimumPayment || 0;
-                    const campsites = cart.cart.parkShoppingCarts[parkId].shoppingCartItems || [];
-                    const grandTotal = cart.cart.parkShoppingCarts[parkId].grandTotal || 0;
-                    
-                    // Store park name globally
-                    window.parkName = cart.cart.parkShoppingCarts[parkId].parkName || '';
-                    
-                    // Specifically extract the externalCharges from the correct location in the JSON
-                    window.externalCharges = cart.cart.parkShoppingCarts[parkId].externalCharges || [];
-                    console.log("External charges found:", window.externalCharges);
-                    
-                    // Store in localStorage for future use - ensure we stringify the array properly
-                    localStorage.setItem('parkName', window.parkName);
-                    localStorage.setItem('externalCharges', JSON.stringify(window.externalCharges));
-                    
-                    // After the cart data is loaded, update the checkout heading to include park name
-                    if (window.parkName) {
-                        updateCheckoutHeading(window.parkName);
-                    }
-                    
-                    let filteredCampsites = [];
-
-                    if (campsites.length) {
-                        for (const campsite of campsites) {
-                            const filteredCampsite = processCampsite(campsite);
-                            filteredCampsites.push(filteredCampsite);
-                        }
-                    }
-
-                    // Store processed campsites and grand total for future use
-                    localStorage.setItem('cartData', JSON.stringify(filteredCampsites));
-                    localStorage.setItem('grandTotal', grandTotal);
-                    
-                    allCampsites = filteredCampsites;
-
-                    displayAvailableCampsite(allCampsites, grandTotal);
-                    updatePaymentAmount(grandTotal, minimumPayment);
-                } catch (error) {
-                    console.error('Error fetching campground data:', error);
-                } finally {
-                    overlay.hide();
-                    spinner.hide();
+            try {
+                console.log("Sending cart request...");
+                const response = await fetch(urlWithParams);
+                console.log("Cart response received. Status:", response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`Network response error: ${response.status} ${response.statusText}`);
                 }
+                
+                const cart = await response.json();
+                console.log("CART DATA:", cart);
+
+                // Check if the cart data is valid
+                if (!cart || !cart.cart || !cart.cart.parkShoppingCarts || !cart.cart.parkShoppingCarts[parkId]) {
+                    console.error("Invalid cart data structure:", cart);
+                    alert("There was an error loading your cart data. Please try refreshing the page.");
+                    return;
+                }
+
+                const minimumPayment = cart.minimumPayment?.minimumPayment || 0;
+                const campsites = cart.cart.parkShoppingCarts[parkId].shoppingCartItems || [];
+                const grandTotal = cart.cart.parkShoppingCarts[parkId].grandTotal || 0;
+                
+                // Store park name globally
+                window.parkName = cart.cart.parkShoppingCarts[parkId].parkName || '';
+                
+                // Specifically extract the externalCharges from the correct location in the JSON
+                window.externalCharges = cart.cart.parkShoppingCarts[parkId].externalCharges || [];
+                console.log("External charges found:", window.externalCharges);
+                
+                // Store in localStorage for future use - ensure we stringify the array properly
+                localStorage.setItem('parkName', window.parkName);
+                localStorage.setItem('externalCharges', JSON.stringify(window.externalCharges));
+                
+                // After the cart data is loaded, update the checkout heading to include park name
+                if (window.parkName) {
+                    updateCheckoutHeading(window.parkName);
+                }
+                
+                let filteredCampsites = [];
+
+                if (campsites.length) {
+                    for (const campsite of campsites) {
+                        const filteredCampsite = processCampsite(campsite);
+                        filteredCampsites.push(filteredCampsite);
+                    }
+                }
+
+                // Store processed campsites and grand total for future use
+                localStorage.setItem('cartData', JSON.stringify(filteredCampsites));
+                localStorage.setItem('grandTotal', grandTotal);
+                
+                allCampsites = filteredCampsites;
+
+                displayAvailableCampsite(allCampsites, grandTotal);
+                updatePaymentAmount(grandTotal, minimumPayment);
+            } catch (error) {
+                console.error('Error fetching campground data:', error);
+                
+                // Show error to user
+                alert(`Error loading cart data: ${error.message}. Please refresh and try again.`);
+                
+                // Add debugging element to the page
+                $('body').append(`<div id="cart-error-indicator" style="position:fixed; bottom:10px; right:10px; background:red; color:white; padding:5px 10px; border-radius:5px; z-index:9999; max-width:80%; word-break:break-word;">Cart error: ${error.message}</div>`);
+                setTimeout(() => $('#cart-error-indicator').fadeOut(2000, function() { $(this).remove(); }), 5000);
+                
+            } finally {
+                overlay.hide();
+                spinner.hide();
             }
         }
+
+        // Add this code at the beginning of your document.ready function
+        $(document).ready(function () {
+            console.log('Page loaded, starting cart fetch...');
+            
+            // Setup request logging for debugging
+            const originalFetch = window.fetch;
+            window.fetch = function() {
+                console.log('Fetch request:', arguments[0]);
+                return originalFetch.apply(this, arguments)
+                    .then(response => {
+                        console.log('Fetch response status:', response.status, response.statusText);
+                        return response;
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                        throw error;
+                    });
+            };
+            
+            // Call fetchCart with a slight delay to ensure DOM is ready
+            setTimeout(fetchCart, 500);
+            
+            // Also add a retry button in case the initial load fails
+            $('body').append(`
+                <button id="retry-fetch-cart" 
+                        style="position:fixed; bottom:20px; left:20px; z-index:1000; 
+                            background:var(--primary); color:white; border:none; 
+                            padding:10px 15px; border-radius:5px; cursor:pointer;
+                            display:none; font-weight:bold;">
+                    Retry Loading Cart
+                </button>
+            `);
+            
+            $('#retry-fetch-cart').on('click', function() {
+                console.log('Manual cart fetch retry...');
+                $(this).text('Loading...');
+                fetchCart().finally(() => {
+                    $(this).text('Retry Loading Cart');
+                });
+            });
+            
+            // Show retry button after a delay if needed
+            setTimeout(() => {
+                if ($('.checkout-summary-item').length === 0) {
+                    $('#retry-fetch-cart').show();
+                }
+            }, 5000);
+        });
 
         function updateCheckoutHeading(parkName) {
             // Remove any existing park name element first to avoid duplication
